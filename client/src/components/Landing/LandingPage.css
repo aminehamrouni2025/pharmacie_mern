@@ -1,0 +1,143 @@
+@import "react-alice-carousel/lib/alice-carousel.css";
+
+/* navbar part */
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  height: 35px;
+  align-items: center;
+  background-color: #284000;
+  top: 0;
+  color: white;
+}
+.navbar .links {
+  display: flex;
+
+  width: 150px;
+
+  justify-content: space-evenly;
+}
+.links p {
+  size: 18px;
+}
+/* second section */
+.second-nav {
+  display: flex;
+  justify-content: space-evenly;
+
+  margin-top: 15px;
+  height: 150px;
+  align-items: center;
+}
+.second-nav .logo {
+  width: 140px;
+  height: 120px;
+}
+.second-nav .search-landing {
+  width: 300px;
+  height: 40px;
+  border-radius: 20px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  border: 1px solid #e2e2e2;
+  border-radius: 30px;
+}
+.search-landing input {
+  width: 250px;
+  padding: 0 24px;
+  line-height: 30px;
+  font-size: 14px;
+  border: transparent;
+  height: auto;
+  border-radius: 30px;
+}
+.search-landing h4 {
+  font-size: 30px;
+  font-weight: 500;
+  background-color: rgb(36, 35, 35);
+  width: 40px;
+  height: 35px;
+  border-radius: 50%;
+  color: #e2e2e2;
+  text-align: center;
+  align-self: center;
+}
+.nav-connect {
+  display: flex;
+  flex-direction: row;
+  width: 150px;
+  justify-content: space-evenly;
+}
+.second-nav .panier {
+  width: 120px;
+  height: 35px;
+  border: 2px solid green;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+}
+.panier h3 {
+  font-size: 16px;
+  color: green;
+}
+.categories {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  color: white;
+  background-color: #284000;
+  justify-content: space-between;
+  margin-top:25px
+}
+.category-list {
+  width: 100%;
+}
+.categories .link-categorie {
+  display: flex;
+  justify-content: space-between;
+  width: 100% !important;
+  list-style-type: none;
+  align-items: center !important;
+  
+  
+}
+.categories .link-categorie li{
+  text-align: center;
+  
+}
+.categories .link-categorie li a {
+  text-decoration: none;
+   color: #e2e2e2;
+  
+  font-size: 20px;
+   
+}
+/* end navbar */
+
+/* swipe */
+.swipe {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+}
+.swipe .title-swipe {
+  width: 100%; 
+}
+.swipe .title-swipe h1 {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 45px;
+  color: #284000;
+}
+.swipe img {
+  width:100%;
+  height: 300px;
+  border-radius: 25px;
+}
+
+/* end swipe */
