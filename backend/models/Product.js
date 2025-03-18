@@ -26,6 +26,11 @@ const ProductSchema = new mongoose.Schema({
     required: true,
     min: 0,
   },
+   owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+     
+    },
   image: {
     type: String,
   },

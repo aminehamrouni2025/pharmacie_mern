@@ -3,7 +3,7 @@ const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 // register user
 exports.register = async (req, res) => {
-  const { fullName, email, password, role , address } = req.body;
+  const { fullName, email, password, role, address } = req.body;
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -20,7 +20,7 @@ exports.register = async (req, res) => {
       email,
       password: hashedPassword,
       role: role || "client",
-      address : address || "your current address"
+      address: address || "your current address",
     });
     return res.status(201).json({
       status: "success",
@@ -38,7 +38,7 @@ exports.login = async (req, res) => {
   try {
     const user = await User.findOne({ email });
     if (!user) {
-      res
+      return res
         .status(401)
         .json({ msg: "user not found, please create an account!" });
     }
