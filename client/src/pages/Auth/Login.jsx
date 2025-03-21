@@ -20,10 +20,11 @@ function Login() {
     axios
       .post("http://localhost:5000/api/users/login", formData)
       .then((response) => {
-        const { token, role } = response.data;
+        const { token, role, id } = response.data;
         // console.log(token);
         localStorage.setItem("token", token);
         localStorage.setItem("role", role);
+        localStorage.setItem("id", id);
         if (role == "admin") {
           navigate("/admin");
         } else if (role == "pharmacist") {

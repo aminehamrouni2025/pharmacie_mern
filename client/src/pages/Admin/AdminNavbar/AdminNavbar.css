@@ -1,0 +1,66 @@
+/* Navbar Container */
+.admin-navbar {
+  background-color: #003e29;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 15px;
+}
+
+/* Admin Dashboard Title */
+.admin-navbar .navbar-title {
+  font-size: 18px;
+  font-weight: bold;
+  /* color: #d5103f; */
+}
+
+/* Avatar Button */
+.admin-navbar .avatar-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Avatar Image */
+.admin-navbar .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+/* Dropdown Menu */
+.admin-navbar .dropdown-menu {
+  position: absolute;
+  right: 10px;
+  top: 70px;
+  background: white;
+  color: black;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 140px;
+}
+
+/* Dropdown Items */
+.admin-navbar .dropdown-item {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: black;
+  font-size: 14px;
+  text-align: center;
+}
+.admin-navbar .dropdown-menu button {
+    background-color: #003e29;
+    color: #f0f0f0;
+    width: 90%;
+    border-radius: 25px;
+    margin: 10px;
+    border: 1px solid #003e29;
+     
+}
+.admin-navbar.dropdown-item:hover {
+  background-color: #f0f0f0;
+}

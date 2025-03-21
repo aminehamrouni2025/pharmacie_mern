@@ -15,12 +15,16 @@ const port = process.env.PORT || 8000;
 const MONGO_URI = process.env.MONGO_URI;
 const authRoutes = require('./routes/authRoutes')
 const pharmacyRoutes = require('./routes/pharmacyRoutes')
+const adminRoutes = require("./routes/adminRoutes");
+
 // middlewares
 app.use(express.json());
 
 // routes
 app.use('/api/users/', authRoutes)
 app.use("/api/pharmacies/", pharmacyRoutes);
+app.use("/api/admin/", adminRoutes);
+
 // Database
 mongoose
   .connect(MONGO_URI)
