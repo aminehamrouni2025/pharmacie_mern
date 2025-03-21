@@ -70,6 +70,14 @@
   width: 150px;
   justify-content: space-evenly;
 }
+.nav-connect .link-title {
+  font-family: 14px;
+}
+.nav-connect h3 a {
+  text-decoration: none;
+  color: black;
+  
+}
 .second-nav .panier {
   width: 120px;
   height: 35px;

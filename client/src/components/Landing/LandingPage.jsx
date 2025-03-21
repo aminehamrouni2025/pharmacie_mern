@@ -41,7 +41,9 @@ function LandingPage() {
           <h3>
             <CiLock />
           </h3>
-          <h3>Sign Up</h3>
+          <h3 className="link-title">
+            <Link to='/login' >Sign Up</Link>{" "}
+          </h3>
         </div>
         <div className="panier">
           <h3>
@@ -85,10 +87,10 @@ function LandingPage() {
       </section>
       {/* title & swipe part */}
       <section className="swipe">
-         <div className="title-swipe">
+        <div className="title-swipe">
           <h1>The best pharmacy online in tunisia</h1>
-         </div>
-         <Carousel/>
+        </div>
+        <Carousel />
       </section>
     </div>
   );
