@@ -1,0 +1,75 @@
+.topbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.402);
+  padding: 20px;
+}
+
+.cards-container {
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 250px;
+}
+
+.card-icon-container {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.card-icon {
+  font-size: 24px;
+  color: white;
+}
+
+.card-content h3 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.card-content p {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.details-link {
+  color: green;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.details-link:hover {
+  text-decoration: underline;
+}
+
+/* Icon Background Colors */
+.blue {
+  background: #3b82f6;
+}
+
+.green {
+  background: #10b981;
+}
+
+.yellow {
+  background: #facc15;
+}
+.red {
+  background: #fa1515;
+}
