@@ -7,7 +7,7 @@
   width: 100%;
   height: 35px;
   align-items: center;
-  background-color: #284000;
+  background-color: #003e29;
   top: 0;
   color: white;
 }
@@ -81,7 +81,7 @@
 .second-nav .panier {
   width: 120px;
   height: 35px;
-  border: 2px solid green;
+  border: 2px solid #003e29;
   border-radius: 20px;
   display: flex;
   justify-content: space-evenly;
@@ -90,15 +90,15 @@
 }
 .panier h3 {
   font-size: 16px;
-  color: green;
+  color: #003e29;
 }
 .categories {
   display: flex;
   width: 100%;
   height: 50px;
   color: white;
-  background-color: #284000;
-  justify-content: space-between;
+  background-color: #003e29;
+  justify-content: space-evenly;
   margin-top:25px
 }
 .category-list {
@@ -121,7 +121,7 @@
   text-decoration: none;
    color: #e2e2e2;
   
-  font-size: 20px;
+  font-size: 16px;
    
 }
 /* end navbar */
@@ -140,7 +140,7 @@
   text-transform: uppercase;
   text-align: center;
   font-size: 45px;
-  color: #284000;
+  color: #003e29;
 }
 .swipe img {
   width:100%;

@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Pharmacy = require("../models/Pharmacy");
 const CryptoJS = require("crypto-js");
 
 // user CRUD for admin
@@ -92,11 +93,31 @@ exports.deleteUser = async (req, res) => {
 };
 exports.getAllUser = async (req, res) => {
   try {
-    if(!req.user || req.user.role !=="admin"){
-        return res.status(403).json({msg:"You are not Allowed"})
+    if (!req.user || req.user.role !== "admin") {
+      return res.status(403).json({ msg: "You are not Allowed" });
     }
-    const users = await User.find()
-    return res.status(201).json({msg : "All users ", data :users})
+    const users = await User.find();
+    return res.status(201).json({ msg: "All users ", data: users });
+  } catch (error) {
+    return res.status(500).json({ msg: error });
+  }
+};
+
+exports.getStats = async (req, res) => {
+  try {
+    if (!req.user || req.user.role !== "admin") {
+      return res.status(403).json({ msg: "Only admins are allowed " });
+      
+    }
+    const totalUsers = await User.countDocuments();
+    const totalPharmacies = await Pharmacy.countDocuments();
+    res.status(200).json({
+      success: true,
+      stats: {
+        totalUsers,
+        totalPharmacies,
+      },
+    });
   } catch (error) {
     return res.status(500).json({ msg: error });
   }

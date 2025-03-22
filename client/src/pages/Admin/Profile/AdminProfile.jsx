@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+
+
 const AdminProfile = () => {
   const [getProfile, setGetProfile] = useState({});
   const id = localStorage.getItem("id");
@@ -24,7 +26,16 @@ const AdminProfile = () => {
     if (id && token) fetchProfile();
   }, [id, token]);
 console.log(getProfile)
-  return <div>My profile</div>;
+  return (
+    <div>
+      <h3>{getProfile.fullName}</h3>
+      <h3>{getProfile.email}</h3>
+      <h3>{getProfile.address}</h3>
+      <img
+      src={getProfile.image}
+      />
+    </div>
+  );
 };
 
 export default AdminProfile;

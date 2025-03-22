@@ -5,6 +5,7 @@
     grid-template-rows: repeat(6, 1fr);
     gap: 8px;
     margin-top: 15px;
+ 
 }
     
 .admin-dashboard .admin-sidebar {
@@ -14,18 +15,18 @@
 
 .admin-dashboard .admin-cards {
   grid-column: span 5 / span 5;
-    grid-row: span 2 / span 2;
-    border: 1px solid black;
+    grid-row: span 1 / span 1;
+   
 
 
 }
 
 .admin-dashboard .admin-content {
      grid-column: span 5 / span 5;
-    grid-row: span 4 / span 4;
+    grid-row: span 5 / span 5;
     grid-column-start: 2;
-    grid-row-start: 3;
-    border: 1px solid black;
+    grid-row-start: 2;
+ 
 
 
 }

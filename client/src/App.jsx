@@ -3,13 +3,14 @@ import { useState } from "react";
 import "./App.css";
 import LandingPage from "./components/Landing/LandingPage";
 import { Routes, Route, Navigate } from "react-router";
-import Login from "./pages/auth/Login";
+import Login from "./pages/Auth/Login";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import PharmacistDashboard from './pages/Pharmacist/PharmacistDashboard'
 import ClientDashboard from './pages/Client/ClientDashboard'
 import ProtectedRoute from "./routes/ProtectedRoutes";
 import PublicRoute from "./routes/PublicRoutes";
 import AdminProfile from "./pages/Admin/Profile/AdminProfile"
+import Register  from "./pages/Auth/Register/Register";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Route element={<PublicRoute />}>
         <Route index element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={ <Register />} />
       </Route>
 
       {/* Routes protégées */}
@@ -25,7 +27,7 @@ function App() {
       </Route> */}
       {/* Routes protégées selon le rôle */}
       <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
-        <Route path="/admin"  element={<AdminDashboard />}>
+        <Route path="/admin" element={<AdminDashboard />}>
           <Route path="profile" element={<AdminProfile />} />
         </Route>
       </Route>
