@@ -9,6 +9,7 @@ const {
   getUser,
   deleteUser,
   getAllUser,
+  getStats,
 } = require("../controllers/adminControllers");
 
 router.post("/create-user", verifyToken, checkRole("admin"), createUser);
@@ -23,4 +24,5 @@ router.get("/user/:id", verifyToken, checkRole("admin"), getUser);
 router.delete("/delete-user/:id", verifyToken, checkRole("admin"), deleteUser);
 
 router.get("/users", verifyToken, checkRole("admin"), getAllUser);
+router.get("/stats", verifyToken, checkRole("admin"), getStats);
 module.exports = router;
