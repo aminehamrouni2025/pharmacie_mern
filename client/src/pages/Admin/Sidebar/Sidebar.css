@@ -1,14 +1,14 @@
 /* Sidebar.css */
 .sidebar {
 
-  height: 100vh;
+  height: 100%;
   background: #003e29;
   color: white;
   padding: 15px;
   
   display: flex;
   flex-direction: column;
-  /* justify-content: space-around; */
+
   border-radius: 15px;
 }
 

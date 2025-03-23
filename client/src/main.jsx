@@ -5,7 +5,7 @@ import App from './App.jsx'
 import { BrowserRouter } from "react-router";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "react-toastify/dist/ReactToastify.css"; // Import toast styles
-
+import "leaflet/dist/leaflet.css";
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>

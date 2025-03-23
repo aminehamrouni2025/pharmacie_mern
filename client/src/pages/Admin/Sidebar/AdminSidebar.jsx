@@ -8,7 +8,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <ul className="sidebar-menu">
         <li>
-          <NavLink to="/clients" className="nav-link">
+          <NavLink to="/admin/allusers" className="nav-link">
             <FaUser className="icon" /> Clients
           </NavLink>
         </li>

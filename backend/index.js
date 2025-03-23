@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
+const path = require("path");
+
 require("dotenv").config();
 const cors = require('cors')
 
@@ -18,8 +20,8 @@ const pharmacyRoutes = require('./routes/pharmacyRoutes')
 const adminRoutes = require("./routes/adminRoutes");
 
 // middlewares
+app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(express.json());
-
 // routes
 app.use('/api/users/', authRoutes)
 app.use("/api/pharmacies/", pharmacyRoutes);

@@ -11,6 +11,8 @@ import ProtectedRoute from "./routes/ProtectedRoutes";
 import PublicRoute from "./routes/PublicRoutes";
 import AdminProfile from "./pages/Admin/Profile/AdminProfile"
 import Register  from "./pages/Auth/Register/Register";
+import EditProfile from './pages/Admin/Profile/EditProfile'
+import AllUsers from "./pages/Admin/AllUsers/AllUsers";
 
 function App() {
   return (
@@ -18,7 +20,7 @@ function App() {
       <Route element={<PublicRoute />}>
         <Route index element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={ <Register />} />
+        <Route path="/register" element={<Register />} />
       </Route>
 
       {/* Routes protégées */}
@@ -29,6 +31,8 @@ function App() {
       <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
         <Route path="/admin" element={<AdminDashboard />}>
           <Route path="profile" element={<AdminProfile />} />
+          <Route path="profile/edit" element={<EditProfile />} />
+          <Route path="allusers" element={<AllUsers />} />
         </Route>
       </Route>
 

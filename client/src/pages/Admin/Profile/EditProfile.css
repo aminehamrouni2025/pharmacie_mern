@@ -1,0 +1,82 @@
+.edit-profile-card {
+  width: 90%;
+  background: #003e29;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.back-btn {
+  background: white;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 10px;
+  width: 15%;
+  color: #003e29;
+}
+
+.back-btn:hover {
+  background: #f0f0f0;
+}
+
+.edit-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  border: 1px solid white;
+  padding: 15px;
+  border-radius: 20px;
+  width: 40%;
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.edit-profile-form label {
+  font-weight: bold;
+  align-self: flex-start;
+}
+
+.edit-profile-form input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+}
+
+.image-preview {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid white;
+  margin-top: 10px;
+}
+
+.save-btn {
+  background: #003e29;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width:50%;
+
+}
+
+.save-btn:hover {
+  background: green;
+}

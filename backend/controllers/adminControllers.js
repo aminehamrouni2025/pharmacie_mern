@@ -107,7 +107,6 @@ exports.getStats = async (req, res) => {
   try {
     if (!req.user || req.user.role !== "admin") {
       return res.status(403).json({ msg: "Only admins are allowed " });
-      
     }
     const totalUsers = await User.countDocuments();
     const totalPharmacies = await Pharmacy.countDocuments();
@@ -120,5 +119,61 @@ exports.getStats = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({ msg: error });
+  }
+};
+
+// get the admin credentials :
+exports.getAdmin = async (req, res) => {
+  try {
+    const { id } = req.user;
+    if (!req.user || req.user.role !== "admin") {
+      return res.status(401).json({ msg: "Only Admins are allowed !!!" });
+    }
+    const admin = await User.findById(id);
+    if (!admin) {
+      return res.status(403).json({ msg: "Admin not found" });
+    }
+    return res.status(201).json({ msg: "Admin credentials", data: admin });
+  } catch (error) {}
+};
+
+// update the admin credentials :
+exports.updateAdmin = async (req, res) => {
+  try {
+    const { fullName, address, image, email } = req.body;
+
+    // Ensure that only the authenticated admin can update their own profile
+    if (!req.user || req.user.role !== "admin") {
+      return res.status(403).json({ msg: "Only admins are allowed" });
+    }
+
+    // Find the admin by ID (extracted from the token)
+    const admin = await User.findById(req.user.id);
+    if (!admin) {
+      return res.status(400).json({ msg: "Admin not found!" });
+    }
+
+    // Handle image update
+    // const imageUrl = req.file.path
+   const imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+
+
+    // Update the admin's profile
+    const updatedAdmin = await User.findByIdAndUpdate(
+      req.user.id,
+      {
+        fullName: fullName || admin.fullName,
+        email: email || admin.email,
+        address: address || admin.address,
+        image: imageUrl || admin.image,
+      },
+      { new: true }
+    );
+
+    return res
+      .status(200)
+      .json({ msg: "Admin updated successfully!", data: updatedAdmin });
+  } catch (error) {
+    return res.status(500).json({ msg: error.message });
   }
 };

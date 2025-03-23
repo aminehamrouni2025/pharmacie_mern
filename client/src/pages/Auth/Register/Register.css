@@ -4,14 +4,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: auto;
   background-color: #003e29;
 }
 
 /* Logo */
 .auth-logo img {
-  width: 200px; /* Adjust logo size */
-  margin-bottom: 20px;
+  width: 100px; /* Adjust logo size */
+  
 }
 
 /* Form Container */

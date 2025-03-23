@@ -50,7 +50,7 @@ useEffect(() => {
             <AiFillMedicineBox className="card-icon" />
           </div>
           <div className="card-content">
-            <h3>Total Pharmacies</h3>
+            <h3>Pharmacies</h3>
             <p>{stats.totalPharmacies}</p>
             <a href="#" className="details-link">
               Show Details

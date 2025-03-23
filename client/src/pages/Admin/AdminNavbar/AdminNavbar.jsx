@@ -1,9 +1,31 @@
-import React, { useState } from "react";
-import { useNavigate , Link} from "react-router";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate, Link } from "react-router";
 import "./AdminNavbar.css";
 const AdminNavbar = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
+  const [getProfile, setGetProfile] = useState({});
+  const id = localStorage.getItem("id");
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:5000/api/admin/profile/${id}`,
+          {
+            headers: {
+              Authorization: token, // Send token in Authorization header
+            },
+          }
+        );
+        setGetProfile(response.data.data);
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
+    };
+    if (id && token) fetchProfile();
+  }, [id, token]);
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
@@ -21,7 +43,7 @@ const AdminNavbar = () => {
         >
           <img
             className="avatar"
-            src="https://cdn.pixabay.com/photo/2017/02/23/13/05/avatar-2092113_1280.png"
+            src={getProfile.image}
             // alt="Admin Avatar"
           />
         </button>
