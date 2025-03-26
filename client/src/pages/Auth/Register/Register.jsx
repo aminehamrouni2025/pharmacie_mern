@@ -1,13 +1,52 @@
 import { FaEnvelope, FaLock, FaUser, FaUserTag } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
 
 import MyLogo from "../../../assets/pharma.png";
 import { useNavigate, Link } from "react-router";
 import axios from "axios";
 import "./Register.css";
+import { useState } from "react";
 
-const Register  = () => {
+const Register = () => {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+    role: "",
+  });
+  const navigate = useNavigate();
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    console.log("Form Data Submitted:", formData);
+
+    axios
+      .post("http://localhost:5000/api/users/create-user", formData)
+      .then((response) => {
+        // Success toast message
+        toast.success(` ✅ Register success  ${response.data.data.fullName}`, {
+          position: "top-right",
+          autoClose: 3000,
+        });
+        setTimeout(() => {
+          // Navigate based on role
+          navigate("/login");
+        }, 3000);
+      })
+      .catch((error) => {
+        console.error("Login error:", error);
+
+        // Error toast message
+        toast.error("❌ Register failed", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+      });
+  };
   return (
     <div className="auth-page">
+      <ToastContainer />
+
       <div className="auth-logo">
         <img src={MyLogo} alt="Logo" />
       </div>
@@ -23,9 +62,9 @@ const Register  = () => {
               type="text"
               className="input-field"
               placeholder="Enter your full name"
-              //   onChange={(e) =>
-              //     setFormData({ ...formData, fullName: e.target.value })
-              //   }
+              onChange={(e) =>
+                setFormData({ ...formData, fullName: e.target.value })
+              }
               name="fullName"
             />
           </div>
@@ -39,9 +78,9 @@ const Register  = () => {
               type="text"
               className="input-field"
               placeholder="Enter your email"
-              //   onChange={(e) =>
-              //     setFormData({ ...formData, email: e.target.value })
-              //   }
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
               name="email"
             />
           </div>
@@ -55,9 +94,9 @@ const Register  = () => {
               type="password"
               className="input-field"
               placeholder="Create a password"
-              //   onChange={(e) =>
-              //     setFormData({ ...formData, password: e.target.value })
-              //   }
+              onChange={(e) =>
+                setFormData({ ...formData, password: e.target.value })
+              }
               name="password"
             />
           </div>
@@ -69,9 +108,9 @@ const Register  = () => {
             </label>
             <select
               className="input-field"
-              //   onChange={(e) =>
-              //     setFormData({ ...formData, role: e.target.value })
-              //   }
+              onChange={(e) =>
+                setFormData({ ...formData, role: e.target.value })
+              }
               name="role"
             >
               <option value="">Select Role</option>
@@ -84,7 +123,7 @@ const Register  = () => {
           <button
             type="submit"
             className="auth-button"
-            // onClick={handleRegister}
+            onClick={handleRegister}
           >
             Register
           </button>
@@ -102,4 +141,4 @@ const Register  = () => {
   );
 };
 
-export default Register ;
+export default Register;

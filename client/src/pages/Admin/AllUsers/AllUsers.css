@@ -38,7 +38,7 @@ td {
 }
 
 .all-users button:first-child {
-  background-color: #003e26;
+  background-color: cornflowerblue;
   color: white;
 }
 
@@ -52,4 +52,101 @@ td {
   border-radius: 50%;
   border: 1px solid #4caf50;
   align-self: center;
+}
+
+.all-users .users-title {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+}
+
+.all-users .users-title .input-search {
+  width: 250px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  border: 1px solid #003e26;
+  height: 40px;
+  border-radius: 20px;
+}
+.users-title .input-search input {
+  border: transparent;
+  padding: 5px;
+  width: 180px;
+}
+.users-title .input-search h1 {
+  color: #003e26;
+  padding: 5px;
+}
+.all-users .users-title .create-btn {
+  width: 150px;
+}
+.all-users .users-title .create-btn button {
+  width: 150px;
+  background-color: cornflowerblue;
+}
+
+/* Modal Background */
+/* Modal Overlay */
+ .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal Box */
+ .modal-overlay .modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  text-align: center;
+}
+
+/* Modal Header */
+ .modal-overlay  .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* Close Button */
+ .modal-overlay  .close-icon {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Input Fields */
+ .modal-overlay .modal-body input {
+  width: 90%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Submit Button */
+ .modal-overlay .submit-btn {
+  width: 50%;
+  padding: 10px;
+  background: #007bff !important;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+ .modal-overlay .submit-btn:hover {
+  background: #0056b3;
 }

@@ -26,11 +26,12 @@ const userSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      default: "https://robohash.org/default-user.png",
+      default:
+        "https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png",
     },
     address: {
       type: String,
-      default: "your current address"
+      default: "your current address",
     },
   },
   { timestamps: true }
