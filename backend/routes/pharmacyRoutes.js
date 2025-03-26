@@ -7,6 +7,7 @@ const {
   getProduct,
   getAllProducts,
   createSupply,
+  getSupplyPharmacy,
 } = require("../controllers/pharmacyController");
 const { verifyToken, checkRole } = require("../middlewares/authMiddleware");
 const upload = require("../middlewares/upload");
@@ -52,5 +53,11 @@ router.post(
   verifyToken,
   checkRole("pharmacist"),
   createSupply
+);
+router.get(
+  "/supply/:id",
+  verifyToken,
+  checkRole("pharmacist"),
+  getSupplyPharmacy
 );
 module.exports = router;

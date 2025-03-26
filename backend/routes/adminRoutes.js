@@ -40,5 +40,5 @@ router.get("/users", verifyToken, checkRole("admin"), getAllUser);
 router.get("/stats", verifyToken, checkRole("admin"), getStats);
 router.get("/all-supplies", verifyToken, checkRole("admin"), getSupplies);
 router.get("/supply/:id", verifyToken, checkRole("admin"), getSupply);
-router.get("/update-supply/:id", verifyToken, checkRole("admin"), updateSupply);
+router.put("/update-supply/:id", verifyToken, checkRole("admin"), updateSupply);
 module.exports = router;

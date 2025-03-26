@@ -305,16 +305,31 @@ exports.createSupply = async (req, res) => {
     if (!req.user || req.user.role !== "pharmacist") {
       return res.status(403).json({ msg: "Only Pharmacists are allowed !!!" });
     }
-    const { product, quantity , description } = req.body;
+    const { product, quantity, description } = req.body;
     const newSupply = await Supply.create({
       product,
       quantity,
-      description ,
+      description,
       pharmacist: id,
     });
     return res
       .status(201)
       .json({ msg: "Supply send to admin successfully", data: newSupply });
+  } catch (error) {
+    return res.status(500).json({ msg: error });
+  }
+};
+
+exports.getSupplyPharmacy = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!req.user || req.user.role !== "pharmacist") {
+      return res.status(403).json({ msg: "Only Pharmacist are allowed!!!" });
+    }
+    const supplyPharmacy = await Supply.findById(id);
+    return res
+      .status(201)
+      .json({ msg: "Consulting supply", data: supplyPharmacy });
   } catch (error) {
     return res.status(500).json({ msg: error });
   }

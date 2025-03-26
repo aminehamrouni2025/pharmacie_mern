@@ -1,6 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router";
 import { FaUser, FaUserMd, FaShoppingCart, FaBoxes } from "react-icons/fa";
+import { MdLocalPharmacy } from "react-icons/md";
+import { GiMedicines } from "react-icons/gi";
+
+
 import "./Sidebar.css";
 
 const Sidebar = () => {
@@ -18,13 +22,23 @@ const Sidebar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/orders" className="nav-link">
-            <FaShoppingCart className="icon" /> Orders
+          <NavLink to="/all-pharmacies" className="nav-link">
+            <MdLocalPharmacy className="icon" /> Pharmacies
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/all-products" className="nav-link">
+            <GiMedicines className="icon" /> Products
           </NavLink>
         </li>
         <li>
           <NavLink to="/supplies" className="nav-link">
             <FaBoxes className="icon" /> Supplies
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/orders" className="nav-link">
+            <FaShoppingCart className="icon" /> Orders
           </NavLink>
         </li>
       </ul>

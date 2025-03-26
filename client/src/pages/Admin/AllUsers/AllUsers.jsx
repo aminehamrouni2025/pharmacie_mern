@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./AllUsers.css";
 import axios from "axios";
+import { CiSearch } from "react-icons/ci";
+
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
 
@@ -45,7 +47,22 @@ const AllUsers = () => {
 
   return (
     <div className="all-users">
-      <h2>All Users</h2>
+      <div className="users-title">
+        <div>
+          <div className="input-search">
+            <h1>
+              <CiSearch />
+            </h1>
+
+            <input type="text" placeholder="Search for a client" />
+          </div>
+        </div>
+        <h2>All Users</h2>
+        <div className="create-btn">
+          <button onClick={(()=>alert("Functionnality yet to add"))}>Create new client</button>
+        </div>
+      </div>
+
       <table
         border="1"
         cellPadding="5"
