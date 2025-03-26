@@ -1,8 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router";
 import { FaUser, FaUserMd, FaShoppingCart, FaBoxes } from "react-icons/fa";
-import { MdLocalPharmacy } from "react-icons/md";
+import { FaCodePullRequest } from "react-icons/fa6";
 import { GiMedicines } from "react-icons/gi";
+import { SiHomeassistantcommunitystore } from "react-icons/si";
 
 
 import "./Sidebar.css";
@@ -13,17 +14,13 @@ const Sidebar = () => {
       <ul className="sidebar-menu">
         <li>
           <NavLink to="/admin/allusers" className="nav-link">
-            <FaUser className="icon" /> Clients
+            <FaUser className="icon" /> Users
           </NavLink>
         </li>
-        <li>
-          <NavLink to="/pharmacists" className="nav-link">
-            <FaUserMd className="icon" /> Pharmacists
-          </NavLink>
-        </li>
+
         <li>
           <NavLink to="/all-pharmacies" className="nav-link">
-            <MdLocalPharmacy className="icon" /> Pharmacies
+            <SiHomeassistantcommunitystore className="icon" /> Pharmacies
           </NavLink>
         </li>
         <li>
@@ -33,7 +30,7 @@ const Sidebar = () => {
         </li>
         <li>
           <NavLink to="/supplies" className="nav-link">
-            <FaBoxes className="icon" /> Supplies
+            <FaCodePullRequest className="icon" /> Supplies
           </NavLink>
         </li>
         <li>

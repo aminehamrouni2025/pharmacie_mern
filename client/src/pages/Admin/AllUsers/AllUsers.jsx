@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./AllUsers.css";
 import axios from "axios";
 import { CiSearch } from "react-icons/ci";
+import UpdateUser from "./UpdateUser";
 
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+   const [selectedUser, setSelectedUser] = useState(null);
+
 
   const token = localStorage.getItem("token");
   useEffect(() => {
@@ -26,25 +30,33 @@ const AllUsers = () => {
     };
     if (token) getUsers();
   }, [token]);
+useEffect(()=>{
 
+})
   // console.log(users)
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       try {
-        await fetch(`http://localhost:5000/api/users/${id}`, {
-          method: "DELETE",
-        });
+        await axios.delete(
+          `http://localhost:5000/api/admin/delete-user/${id}`,
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
         setUsers(users.filter((user) => user._id !== id));
       } catch (error) {
         console.error("Error deleting user:", error);
       }
     }
   };
-  const clients = Array.isArray(users)
-    ? users.filter((user) => user.role == "client")
-    : [];
-  console.log(clients);
-
+ 
+ const handleEdit = (user) => {
+   setSelectedUser(user); // Set the user being updated
+   setIsOpen(true);
+ };
+  
   return (
     <div className="all-users">
       <div className="users-title">
@@ -59,10 +71,11 @@ const AllUsers = () => {
         </div>
         <h2>All Users</h2>
         <div className="create-btn">
-          <button onClick={(()=>alert("Functionnality yet to add"))}>Create new client</button>
+          <button onClick={() => alert("Functionnality yet to add")}>
+            Create new client
+          </button>
         </div>
       </div>
-
       <table
         border="1"
         cellPadding="5"
@@ -78,28 +91,34 @@ const AllUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {clients.map((user) => (
-            <tr key={user._id}>
-              <td>
-                <img src={user.image} />
-              </td>
-              <td>{user.fullName}</td>
-              <td>{user.email}</td>
-              <td>{user.role}</td>
-              <td>
-                <button
-                  onClick={() =>
-                    alert("Edit functionality not implemented yet")
-                  }
-                >
-                  Edit
-                </button>
-                <button onClick={() => handleDelete(user._id)}>Delete</button>
-              </td>
-            </tr>
-          ))}
+          {Array.isArray(users) ? (
+            users.map((user) => (
+              <tr key={user._id}>
+                <td>
+                  <img src={user.image} />
+                </td>
+                <td>{user.fullName}</td>
+                <td>{user.email}</td>
+                <td>{user.role}</td>
+                <td>
+                  <button onClick={() => handleEdit(user)}>Edit</button>
+                  <button onClick={() => handleDelete(user._id)}>Delete</button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <h1> No USers Found</h1>
+          )}
         </tbody>
       </table>
+      {isOpen && (
+        <UpdateUser
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          user={selectedUser} // Pass the user being updated
+        
+        />
+      )}
     </div>
   );
 };

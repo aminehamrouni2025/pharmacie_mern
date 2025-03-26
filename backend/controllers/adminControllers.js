@@ -38,7 +38,7 @@ exports.createUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { fullName, password, address, image } = req.body;
+    const { fullName, address, email } = req.body;
     if (!req.user || req.user.role !== "admin") {
       return res.status(403).json({ msg: "Only admins are allowed " });
     }
@@ -46,14 +46,16 @@ exports.updateUser = async (req, res) => {
     if (!user) {
       return res.status(400).json({ msg: "User not found !!!" });
     }
-    const imageUrl = req.file.path;
+    const imageUrl = req.file
+      ? `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+      : user.image; // Keep the existing image if no new file is uploaded
     const updatedUser = await User.findByIdAndUpdate(
       id,
       {
-        fullName,
-        password,
-        address,
-        image: imageUrl,
+        fullName: fullName || user.fullName,
+        email: email || user.email,
+        address: address || user.address,
+        image: imageUrl 
       },
       { new: true }
     );
@@ -61,7 +63,7 @@ exports.updateUser = async (req, res) => {
       .status(201)
       .json({ msg: "User updated successfully!!", data: updatedUser });
   } catch (error) {
-    return res.status(500).jsn({ msg: error });
+    return res.status(500).json({ msg: error });
   }
 };
 
@@ -119,7 +121,7 @@ exports.getStats = async (req, res) => {
         totalUsers,
         totalPharmacies,
         totalSupplies,
-        totalProducts
+        totalProducts,
       },
     });
   } catch (error) {
@@ -232,12 +234,10 @@ exports.updateSupply = async (req, res) => {
       },
       { new: true }
     );
+
     return res
       .status(201)
       .json({ msg: "Supply updated successfully", data: supply });
-    if (!supply) {
-      return res.status(300).json({ msg: "No Supply request foud!!" });
-    }
   } catch (error) {
     return res.status(500).json({ msg: error });
   }
