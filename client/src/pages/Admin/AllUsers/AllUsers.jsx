@@ -16,7 +16,7 @@ const AllUsers = () => {
             },
           }
         );
-        
+
         setUsers(response.data.data);
       } catch (error) {
         console.error("Error getting users :", error);
@@ -25,19 +25,23 @@ const AllUsers = () => {
     if (token) getUsers();
   }, [token]);
 
-  console.log(users)
-  //   const handleDelete = async (id) => {
-  //     if (window.confirm("Are you sure you want to delete this user?")) {
-  //       try {
-  //         await fetch(`http://localhost:5000/api/users/${id}`, {
-  //           method: "DELETE",
-  //         });
-  //         setUsers(users.filter((user) => user._id !== id));
-  //       } catch (error) {
-  //         console.error("Error deleting user:", error);
-  //       }
-  //     }
-  //   };
+  // console.log(users)
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      try {
+        await fetch(`http://localhost:5000/api/users/${id}`, {
+          method: "DELETE",
+        });
+        setUsers(users.filter((user) => user._id !== id));
+      } catch (error) {
+        console.error("Error deleting user:", error);
+      }
+    }
+  };
+  const clients = Array.isArray(users)
+    ? users.filter((user) => user.role == "client")
+    : [];
+  console.log(clients);
 
   return (
     <div className="all-users">
@@ -57,34 +61,26 @@ const AllUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {Array.isArray(users) ? (
-            users.map((user) => (
-              <tr key={user._id}>
-                <td>
-                    <img
-                    src={user.image}
-                    />
-                </td>
-                <td>{user.fullName}</td>
-                <td>{user.email}</td>
-                <td>{user.role}</td>
-                <td>
-                  <button
-                    onClick={() =>
-                      alert("Edit functionality not implemented yet")
-                    }
-                  >
-                    Edit
-                  </button>
-                  <button onClick={() => handleDelete(user._id)}>Delete</button>
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="4">No users found</td>
+          {clients.map((user) => (
+            <tr key={user._id}>
+              <td>
+                <img src={user.image} />
+              </td>
+              <td>{user.fullName}</td>
+              <td>{user.email}</td>
+              <td>{user.role}</td>
+              <td>
+                <button
+                  onClick={() =>
+                    alert("Edit functionality not implemented yet")
+                  }
+                >
+                  Edit
+                </button>
+                <button onClick={() => handleDelete(user._id)}>Delete</button>
+              </td>
             </tr>
-          )}
+          ))}
         </tbody>
       </table>
     </div>

@@ -12,6 +12,9 @@ const {
   getStats,
   updateAdmin,
   getAdmin,
+  getSupplies,
+  getSupply,
+  updateSupply,
 } = require("../controllers/adminControllers");
 
 router.post("/create-user", verifyToken, checkRole("admin"), createUser);
@@ -35,4 +38,7 @@ router.delete("/delete-user/:id", verifyToken, checkRole("admin"), deleteUser);
 
 router.get("/users", verifyToken, checkRole("admin"), getAllUser);
 router.get("/stats", verifyToken, checkRole("admin"), getStats);
+router.get("/all-supplies", verifyToken, checkRole("admin"), getSupplies);
+router.get("/supply/:id", verifyToken, checkRole("admin"), getSupply);
+router.get("/update-supply/:id", verifyToken, checkRole("admin"), updateSupply);
 module.exports = router;

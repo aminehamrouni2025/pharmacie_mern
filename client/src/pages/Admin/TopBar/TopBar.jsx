@@ -7,7 +7,12 @@ import { AiFillMedicineBox } from "react-icons/ai";
 
 
 function TopBar() {
-  const [stats, setStats] = useState({ totalUsers: 0, totalPharmacies: 0 });
+  const [stats, setStats] = useState({
+    totalUsers: 0,
+    totalPharmacies: 0,
+    totalProducts: 0,
+    totalSupplies: 0,
+  });
   const token = localStorage.getItem("token");
 
 useEffect(() => {
@@ -79,7 +84,7 @@ useEffect(() => {
           </div>
           <div className="card-content">
             <h3>Total Supplies</h3>
-            {/* <p>{stats.supplies}</p> */}
+            <p>{stats.totalSupplies}</p>
             <a href="#" className="details-link">
               Show Details
             </a>
@@ -91,8 +96,8 @@ useEffect(() => {
             <GiReceiveMoney className="card-icon" />
           </div>
           <div className="card-content">
-            <h3>Total Income</h3>
-            {/* <p>{stats.supplies}</p> */}
+            <h3>Total Products</h3>
+            <p>{stats.totalProducts}</p>
             <a href="#" className="details-link">
               Show Details
             </a>

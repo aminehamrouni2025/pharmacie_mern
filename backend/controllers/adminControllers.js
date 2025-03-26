@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const Pharmacy = require("../models/Pharmacy");
+const Supply = require("../models/Supply");
 const CryptoJS = require("crypto-js");
 
 // user CRUD for admin
@@ -110,11 +111,15 @@ exports.getStats = async (req, res) => {
     }
     const totalUsers = await User.countDocuments();
     const totalPharmacies = await Pharmacy.countDocuments();
+    const totalProducts = await Product.countDocuments();
+    const totalSupplies = await Supply.countDocuments();
     res.status(200).json({
       success: true,
       stats: {
         totalUsers,
         totalPharmacies,
+        totalSupplies,
+        totalProducts
       },
     });
   } catch (error) {
@@ -155,8 +160,9 @@ exports.updateAdmin = async (req, res) => {
 
     // Handle image update
     // const imageUrl = req.file.path
-   const imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
-
+    const imageUrl = `${req.protocol}://${req.get("host")}/images/${
+      req.file.filename
+    }`;
 
     // Update the admin's profile
     const updatedAdmin = await User.findByIdAndUpdate(
@@ -175,5 +181,64 @@ exports.updateAdmin = async (req, res) => {
       .json({ msg: "Admin updated successfully!", data: updatedAdmin });
   } catch (error) {
     return res.status(500).json({ msg: error.message });
+  }
+};
+// ***************************
+// supply routes
+
+exports.getSupplies = async (req, res) => {
+  try {
+    if (!req.user || req.user.role !== "admin") {
+      return res.status(403).json({ msg: "Only Admins are Allowed" });
+    }
+    const supplies = await Supply.find();
+    if (!supplies) {
+      return res.status(300).json({ msg: "No Supplies requests foud!!" });
+    }
+    return res.status(201).json({ msg: "All Supplies", data: supplies });
+  } catch (error) {
+    return res.status(500).json({ msg: error });
+  }
+};
+
+exports.getSupply = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!req.user || req.user.role !== "admin") {
+      return res.status(403).json({ msg: "Only Admins are Allowed" });
+    }
+    const supply = await Supply.findById(id);
+    if (!supply) {
+      return res.status(300).json({ msg: "No Supply request foud!!" });
+    }
+    return res.status(201).json({ msg: "supply found", data: supply });
+  } catch (error) {
+    return res.status(500).json({ msg: error });
+  }
+};
+
+exports.updateSupply = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status, description } = req.body;
+    if (!req.user || req.user.role !== "admin") {
+      return res.status(403).json({ msg: "Only Admins are Allowed" });
+    }
+    const supply = await Supply.findByIdAndUpdate(
+      id,
+      {
+        status,
+        description,
+      },
+      { new: true }
+    );
+    return res
+      .status(201)
+      .json({ msg: "Supply updated successfully", data: supply });
+    if (!supply) {
+      return res.status(300).json({ msg: "No Supply request foud!!" });
+    }
+  } catch (error) {
+    return res.status(500).json({ msg: error });
   }
 };

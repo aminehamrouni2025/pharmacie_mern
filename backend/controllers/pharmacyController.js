@@ -1,9 +1,8 @@
 const Pharmacy = require("../models/Pharmacy");
 const Product = require("../models/Product");
+const Supply = require("../models/Supply");
 const User = require("../models/User");
-
-const upload = require("../middlewares/upload");
-
+const mongoose = require("mongoose");
 exports.createPharmacy = async (req, res) => {
   try {
     const { id } = req.user;
@@ -41,14 +40,17 @@ exports.createPharmacy = async (req, res) => {
 };
 
 // create a product
+
 exports.createProduct = async (req, res) => {
   try {
     const { id } = req.user;
+
     if (!req.user || req.user.role !== "pharmacist") {
       return res
         .status(401)
-        .json({ msg: " Only pharmacist are allowed to create product" });
+        .json({ msg: "Only pharmacists are allowed to create products." });
     }
+
     const {
       name,
       description,
@@ -56,87 +58,213 @@ exports.createProduct = async (req, res) => {
       category,
       pharmacy,
       stock,
-      owner,
       image,
+      expiry,
     } = req.body;
-    // checking if product exists
-    const existingProduct = await Product.findOne({ name });
-    if (existingProduct) {
-      return res.status(403).json({ msg: "Product already exists!!!" });
-    }
-    const imageUrl = req.file.path;
 
+    // Ensure stock is non-negative
+    if (stock < 0) {
+      return res.status(400).json({ msg: "Stock cannot be negative." });
+    }
+
+    // Check if pharmacy exists
+    const existingPharmacy = await Pharmacy.findOne({ owner: id });
+    if (!existingPharmacy) {
+      return res.status(404).json({ msg: "Pharmacy not found." });
+    }
+
+    // Check if product already exists in the same pharmacy
+    const existingProduct = await Product.findOne({
+      name,
+      pharmacy: existingPharmacy._id,
+    });
+    if (existingProduct) {
+      return res
+        .status(403)
+        .json({ msg: "Product already exists in this pharmacy!" });
+    }
+
+    // Handle image upload safely
+    const imageUrl = `${req.protocol}://${req.get("host")}/images/${
+      req.file.filename
+    }`;
+
+    // Create new product
     const product = await Product.create({
       name,
       description,
       price,
       category,
-      pharmacy,
+      pharmacy: existingPharmacy._id,
       stock,
       owner: id,
       image: imageUrl,
+      expiry,
     });
+
+    // Push the product into pharmacy inventory
+    existingPharmacy.inventory.push({
+      product: product._id,
+      quantity: product.stock,
+    });
+    await existingPharmacy.save();
+
+    // Populate the response with full product details
+    const populatedProduct = await Product.findById(product._id)
+      .populate("pharmacy", "name address")
+      .populate("owner", "name email");
+
     return res.status(201).json({
       status: true,
-      msg: " Product Created Successfully.",
-      data: product,
+      msg: "Product created and added to inventory successfully.",
+      data: populatedProduct,
     });
   } catch (error) {
-    return res.status(500).json({ msg: error });
+    console.error("Error creating product:", error);
+    return res.status(500).json({ msg: "Internal server error." });
   }
 };
 
 // updating product
 exports.updateProduct = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { name, description, price, category, stock, image } = req.body;
+    const { id } = req.user;
+
     if (!req.user || req.user.role !== "pharmacist") {
       return res
         .status(401)
-        .json({ msg: " Only pharmacist are allowed to create product" });
+        .json({ msg: "Only pharmacists can update products." });
     }
-    let product = await Product.findById(id);
-    if (!product) {
-      return res.status(404).json({ msg: "Product not found" });
-    }
-    const imageUrl = req.file.path;
 
-    const updatedProduct = await Product.findByIdAndUpdate(
-      id,
-      {
-        name,
-        description,
-        price,
-        category,
-        stock,
-        image: imageUrl,
-      },
-      { new: true }
+    const { name, description, price, category, stock, expiry } = req.body;
+    const productId = req.params.id;
+    console.log(productId);
+    if (stock < 0) {
+      return res.status(400).json({ msg: "Stock cannot be negative." });
+    }
+
+    const existingPharmacy = await Pharmacy.findOne({ owner: id });
+    if (!existingPharmacy) {
+      return res.status(404).json({ msg: "Pharmacy not found." });
+    }
+
+    let product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({
+        msg: "Product not found or does not belong to your pharmacy.",
+      });
+    }
+
+    let imageUrl = product.image;
+    if (req.file) {
+      imageUrl = `${req.protocol}://${req.get("host")}/images/${
+        req.file.filename
+      }`;
+    }
+
+    product.name = name || product.name;
+    product.description = description || product.description;
+    product.price = price || product.price;
+    product.category = category || product.category;
+    product.stock = stock !== undefined ? stock : product.stock;
+    product.image = imageUrl;
+    product.expiry = expiry || product.expiry;
+
+    await product.save();
+
+    // ✅ Convert productId to ObjectId for accurate comparison
+    const productObjectId = new mongoose.Types.ObjectId(productId);
+
+    console.log("Before inventory update:", existingPharmacy.inventory);
+
+    // ✅ Find and remove the product if it exists
+    const initialLength = existingPharmacy.inventory.length;
+
+    existingPharmacy.inventory = existingPharmacy.inventory.filter(
+      (item) => !item.product.equals(productObjectId) // Use `.equals()` to compare ObjectIds properly
     );
-    return res
-      .status(201)
-      .json({ msg: "Product updated successfully!!!", data: updatedProduct });
+
+    if (existingPharmacy.inventory.length === initialLength) {
+      console.log(`❌ Product ${productId} was NOT removed from inventory.`);
+    } else {
+      console.log(
+        `✅ Product ${productId} removed successfully from inventory.`
+      );
+    }
+
+    console.log("After removing old product:", existingPharmacy.inventory);
+
+    // ✅ Now add the updated product entry
+    existingPharmacy.inventory.push({
+      product: productObjectId,
+      quantity: stock,
+    });
+
+    console.log(`✅ New product entry added: ${productId} with stock ${stock}`);
+
+    existingPharmacy.markModified("inventory"); // Ensure Mongoose detects changes
+    await existingPharmacy.save();
+
+    console.log("Final inventory state:", existingPharmacy.inventory);
+
+    const updatedProduct = await Product.findById(product._id)
+      .populate("pharmacy", "name address")
+      .populate("owner", "name email");
+
+    return res.status(200).json({
+      status: true,
+      msg: "Product updated successfully.",
+      data: updatedProduct,
+    });
   } catch (error) {
-    return res.status(500).json({ msg: error });
+    console.error("❌ Error updating product:", error);
+    return res.status(500).json({ msg: "Internal server error." });
   }
 };
 
-// delete product
 exports.deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
+
+    // ✅ Ensure only pharmacists can delete products
     if (!req.user || req.user.role !== "pharmacist") {
-      return res.json({ msg: "Only pharmacist are allowed !!!" });
+      return res.status(403).json({ msg: "Only pharmacists are allowed!" });
     }
+
+    // ✅ Find the product
     let product = await Product.findById(id);
     if (!product) {
       return res.status(404).json({ msg: "Product not found" });
     }
-    const deletedProduct = await Product.findByIdAndDelete(id);
-    return res.status(201).json({ msg: "Product deleted successfully" });
+
+    // ✅ Find the pharmacist's pharmacy
+    const pharmacy = await Pharmacy.findOne({ owner: req.user.id });
+    if (!pharmacy) {
+      return res.status(404).json({ msg: "Pharmacy not found" });
+    }
+
+    // ✅ Remove the product from the pharmacy's inventory
+    const initialLength = pharmacy.inventory.length;
+    pharmacy.inventory = pharmacy.inventory.filter(
+      (item) => !item.product.equals(new mongoose.Types.ObjectId(id))
+    );
+
+    if (pharmacy.inventory.length === initialLength) {
+      console.log(`❌ Product ${id} was NOT found in inventory.`);
+    } else {
+      console.log(`✅ Product ${id} removed from inventory.`);
+    }
+
+    // ✅ Save the updated pharmacy without the deleted product
+    await pharmacy.save();
+
+    // ✅ Delete the product from the database
+    await Product.findByIdAndDelete(id);
+
+    return res.status(200).json({ msg: "Product deleted successfully." });
   } catch (error) {
-    return res.status(500).json({ msg: error });
+    console.error("❌ Error deleting product:", error);
+    return res.status(500).json({ msg: "Internal server error." });
   }
 };
 
@@ -147,12 +275,10 @@ exports.getProduct = async (req, res) => {
       return res.status(403).json({ msg: "Only Pharmacists are allowed!!!" });
     }
     const product = await Product.findById(id);
-    if(!product){
-      return res.status(401).json({msg: "Product not found !!!"})
-    }
-    else {
-    return res.status(201).json({ msg: " My Product", data: product });
-
+    if (!product) {
+      return res.status(401).json({ msg: "Product not found !!!" });
+    } else {
+      return res.status(201).json({ msg: " My Product", data: product });
     }
   } catch (error) {
     return res.status(500).json({ msg: error });
@@ -161,13 +287,34 @@ exports.getProduct = async (req, res) => {
 
 exports.getAllProducts = async (req, res) => {
   try {
-       if (!req.user || req.user.role !== "pharmacist") {
-         return res
-           .status(403)
-           .json({ msg: "Only Pharmacists are allowed!!!" });
-       }
-       const products = await Product.find();
-       return res.status(201).json({ msg: " My Products", data: products });
+    if (!req.user || req.user.role !== "pharmacist") {
+      return res.status(403).json({ msg: "Only Pharmacists are allowed!!!" });
+    }
+    const products = await Product.find();
+    return res.status(201).json({ msg: " My Products", data: products });
+  } catch (error) {
+    return res.status(500).json({ msg: error });
+  }
+};
+
+// supply controllers
+
+exports.createSupply = async (req, res) => {
+  try {
+    const { id } = req.user;
+    if (!req.user || req.user.role !== "pharmacist") {
+      return res.status(403).json({ msg: "Only Pharmacists are allowed !!!" });
+    }
+    const { product, quantity , description } = req.body;
+    const newSupply = await Supply.create({
+      product,
+      quantity,
+      description ,
+      pharmacist: id,
+    });
+    return res
+      .status(201)
+      .json({ msg: "Supply send to admin successfully", data: newSupply });
   } catch (error) {
     return res.status(500).json({ msg: error });
   }

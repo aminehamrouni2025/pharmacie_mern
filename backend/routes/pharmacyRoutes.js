@@ -6,6 +6,7 @@ const {
   deleteProduct,
   getProduct,
   getAllProducts,
+  createSupply,
 } = require("../controllers/pharmacyController");
 const { verifyToken, checkRole } = require("../middlewares/authMiddleware");
 const upload = require("../middlewares/upload");
@@ -16,7 +17,7 @@ const router = express.Router();
 router.post(
   "/create-pharmacy",
   verifyToken,
-  checkRole(["pharmacist"]),
+  checkRole("pharmacist"),
   createPharmacy
 );
 router.post(
@@ -45,5 +46,11 @@ router.get(
   verifyToken,
   checkRole("pharmacist"),
   getAllProducts
+);
+router.post(
+  "/create-supply",
+  verifyToken,
+  checkRole("pharmacist"),
+  createSupply
 );
 module.exports = router;

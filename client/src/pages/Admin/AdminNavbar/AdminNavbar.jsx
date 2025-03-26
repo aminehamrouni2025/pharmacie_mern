@@ -34,7 +34,7 @@ const AdminNavbar = () => {
   return (
     <div className="admin-navbar">
       <div className="nav">
-        <h3 className="navbar-title">Admin Dashboard</h3>
+        <h3 className="navbar-title">Pharma Connect Admin 💊</h3>
       </div>
       <div className="dropdown">
         <button
