@@ -31,7 +31,7 @@ exports.createUser = async (req, res) => {
       data: newUser,
     });
   } catch (error) {
-    return res.status(500).jsn({ msg: error });
+    return res.status(500).json({ msg: error });
   }
 };
 

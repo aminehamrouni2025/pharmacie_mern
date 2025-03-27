@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./AdminProfile.css";
 import { FaEdit } from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { IoLocation } from "react-icons/io5";
+import { GoPersonFill } from "react-icons/go";
+
+
+
 import { Link, useNavigate } from "react-router";
 
 const AdminProfile = () => {
@@ -35,7 +41,8 @@ const AdminProfile = () => {
       <div className="profile-left">
         <div className="profile-header">
           <img src={getProfile.image} alt="Profile" className="profile-img" />
-          <h2>{getProfile.fullName}</h2>
+          <h2><GoPersonFill />{getProfile.fullName}
+          </h2>
 
           <button
             className="edit-btn"
@@ -46,9 +53,11 @@ const AdminProfile = () => {
         </div>
         <div className="profile-info">
           <p>
+            <MdEmail />
             <strong>Email:</strong> {getProfile.email}
           </p>
           <p>
+            <IoLocation />
             <strong>Address:</strong> {getProfile.address}
           </p>
         </div>

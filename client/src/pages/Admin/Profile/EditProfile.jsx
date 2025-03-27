@@ -83,7 +83,7 @@ const EditProfile = () => {
 
   return (
     <div className="edit-profile-card">
-      <button className="back-btn" onClick={() => navigate("/profile")}>
+      <button className="back-btn" onClick={() => navigate("/admin/profile")}>
         <FaArrowLeft /> Back to Profile
       </button>
       <h2>Edit Profile</h2>

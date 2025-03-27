@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
 
-const UpdateUser = ({ isOpen, setIsOpen, user  }) => {
+const UpdateUser = ({ isOpen, setIsOpen, user , getUsers }) => {
   const [formData, setFormData] = useState({
     fullName: user?.fullName || "",
     email: user?.email || "",
@@ -45,6 +45,7 @@ const UpdateUser = ({ isOpen, setIsOpen, user  }) => {
       );
     //   updateUsers(response.data.data);
       alert("User updated successfully!");
+      getUsers()
       setIsOpen(false);
     } catch (error) {
       console.error("Error updating user:", error);

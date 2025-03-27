@@ -19,7 +19,7 @@ const Sidebar = () => {
         </li>
 
         <li>
-          <NavLink to="/all-pharmacies" className="nav-link">
+          <NavLink to="/admin/pharmacies" className="nav-link">
             <SiHomeassistantcommunitystore className="icon" /> Pharmacies
           </NavLink>
         </li>

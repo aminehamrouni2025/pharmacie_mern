@@ -3,15 +3,25 @@ import "./AllUsers.css";
 import axios from "axios";
 import { CiSearch } from "react-icons/ci";
 import UpdateUser from "./UpdateUser";
+import CreateUser from "./CreateUser";
+import { ToastContainer, toast } from "react-toastify";
+
 
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
-   const [selectedUser, setSelectedUser] = useState(null);
-
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [newUser, setNewUser] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+    role: "",
+    address:""
+  });
+  const [newUserModal, setNewUserModal] = useState(false);
 
   const token = localStorage.getItem("token");
-  useEffect(() => {
+  
     const getUsers = async () => {
       try {
         const response = await axios.get(
@@ -28,11 +38,10 @@ const AllUsers = () => {
         console.error("Error getting users :", error);
       }
     };
-    if (token) getUsers();
-  }, [token]);
-useEffect(()=>{
-
-})
+    useEffect(() => {
+      if (token) getUsers();
+    }, [token]);
+  useEffect(() => {});
   // console.log(users)
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
@@ -51,14 +60,16 @@ useEffect(()=>{
       }
     }
   };
- 
- const handleEdit = (user) => {
-   setSelectedUser(user); // Set the user being updated
-   setIsOpen(true);
- };
-  
+
+  const handleEdit = (user) => {
+    setSelectedUser(user); // Set the user being updated
+    setIsOpen(true);
+  };
+
   return (
     <div className="all-users">
+      <ToastContainer />
+
       <div className="users-title">
         <div>
           <div className="input-search">
@@ -71,7 +82,7 @@ useEffect(()=>{
         </div>
         <h2>All Users</h2>
         <div className="create-btn">
-          <button onClick={() => alert("Functionnality yet to add")}>
+          <button onClick={() => setNewUserModal(!newUserModal)}>
             Create new client
           </button>
         </div>
@@ -116,9 +127,18 @@ useEffect(()=>{
           isOpen={isOpen}
           setIsOpen={setIsOpen}
           user={selectedUser} // Pass the user being updated
-        
+          getUsers = {getUsers}
         />
       )}
+      {newUserModal ? (
+        <CreateUser
+          newUser={newUser}
+          setNewUser={setNewUser}
+          newUserModal={newUserModal}
+          setNewUserModal={setNewUserModal}
+          getUsers={getUsers}
+        />
+      ) : null}
     </div>
   );
 };

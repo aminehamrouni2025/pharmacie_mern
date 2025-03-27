@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import AdminNavbar from "./AdminNavbar/AdminNavbar";
 import "./AdminDashboard.css";
-import { Outlet } from "react-router";
-import AdminSidebar from "./Sidebar/AdminSidebar"
+import { Outlet, useLocation } from "react-router";
+import AdminSidebar from "./Sidebar/AdminSidebar";
 import TopBar from "./TopBar/TopBar";
+import AdminCharts from "./AdminCharts/AdminCharts";
 function AdminDashboard() {
+  const location = useLocation()
+
   return (
     <>
       <AdminNavbar />
@@ -12,13 +15,14 @@ function AdminDashboard() {
 
       <div className="admin-dashboard">
         <div className="admin-sidebar">
-          <AdminSidebar/>
+          <AdminSidebar />
         </div>
         <div className="admin-cards">
-          <TopBar/>
+          <TopBar />
         </div>
         <div className="admin-content">
-          <Outlet />
+          {location.pathname==="/admin" && <AdminCharts/>}
+           <Outlet />
         </div>
       </div>
     </>

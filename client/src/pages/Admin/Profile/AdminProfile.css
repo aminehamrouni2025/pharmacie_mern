@@ -1,61 +1,73 @@
 .profile-card {
   width: 100%;
-  background: #003e29;
+  background: #f8f9fa;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   display: flex;
-  color: white;
-  font-family: Arial, sans-serif;
+  overflow: hidden;
+  font-family: "Arial", sans-serif;
+  color: #003e29;
 }
 
-.profile-card .profile-left {
+.profile-left {
   width: 50%;
-  padding: 20px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.profile-card .profile-left h2{
-    color: #3E0015
-;
-}
-.profile-card .profile-header {
-  text-align: center;
-}
-
-.profile-card .profile-img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  border: 3px solid white;
-  margin-bottom: 10px;
-}
-
-.profile-card .edit-btn {
   background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 4px solid #003e29;
+  margin-bottom: 15px;
+}
+
+.profile-left h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #003e29;
+}
+
+.edit-btn {
+  background: #003e29;
   border: none;
-  padding: 5px 10px;
+  padding: 8px 12px;
   border-radius: 5px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 5px;
-  color: #003e29;
-}
-.edit-btn a {
-    text-decoration: none;
-    color: #003e29;
+  gap: 8px;
+  color: white;
+  font-weight: bold;
 }
 
 .edit-btn:hover {
-  background: #f0f0f0;
+  background: #026c46;
 }
 
 .profile-info {
   width: 100%;
   text-align: left;
-  padding: 10px;
+}
+
+.profile-info p {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+  color: #003e29;
 }
 
 .profile-right {
@@ -64,10 +76,13 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
+  background-color: #003e29;
+  border-radius: 20px;
 }
 
 .map-container {
   height: 100%;
   width: 100%;
   border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
