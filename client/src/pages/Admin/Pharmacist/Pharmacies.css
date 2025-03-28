@@ -1,47 +1,84 @@
-.pharmacies-page {
+.pharmacies {
   width: 100%;
-  height: auto;
-}
-.pharmacies-page h2 {
-   
+  padding: 20px;
+  background-color: #f8f9fa;
   text-align: center;
+}
+
+.pharmacies__header h2 {
+  font-size: 24px;
   font-weight: bold;
+  margin-bottom: 20px;
 }
-.pharmacies-page .cards-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+
+.pharmacies__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 10px;
+  justify-content: center;
 }
-.pharmacies-page .pharmacy-card {
-  width: 25%;
-  /* border: 1px solid black; */
-  height: 450px;
-  margin: 5px;
-  padding: 5px;
-  box-shadow: 0 4px 6px #003e26;
+
+.pharmacies__card {
   background: white;
-  border-radius: 15px;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  transition: transform 0.3s ease;
+}
+
+.pharmacies__card:hover {
+  transform: translateY(-5px);
+}
+
+.pharmacies__card-header {
+  display: flex;
   align-items: center;
-  display: flex;
-  flex-direction: column;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #2a9d8f;
 }
-.pharmacy-card .pharmacy-title {
-  display: flex;
+
+.pharmacies__icon {
+  font-size: 24px;
 }
-.pharmacy-title h3 {
-  /* color: #003e26; */
-  font-size: 22px;
-  text-align: center;
-  padding: 5px;
-  margin: 5px;
+
+.pharmacies__address {
+  padding: 10px 0;
+  font-size: 14px;
+  color: #555;
 }
-.pharmacy-card img {
-    width: 80px;
-    height: 110px;
-}
-.pharmacy-card .map-container-pharmacy {
-  height: 200px;
+
+.pharmacies__map {
   width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  height: 200px;
+  border: none;
+  border-radius: 8px;
+}
+
+.pharmacies__pagination {
+  margin-top: 20px;
+}
+
+.pharmacies__pagination button {
+  background: #2a9d8f;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease;
+  width: 200px;
+}
+
+.pharmacies__pagination button:hover {
+  background: #21867a;
+}
+
+.pharmacies__pagination .active {
+  background: #1e6f5c;
+  font-weight: bold;
 }

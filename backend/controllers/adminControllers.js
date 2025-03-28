@@ -230,8 +230,10 @@ exports.updateSupply = async (req, res) => {
     const supply = await Supply.findByIdAndUpdate(
       id,
       {
+        
         status,
         description,
+   
       },
       { new: true }
     );

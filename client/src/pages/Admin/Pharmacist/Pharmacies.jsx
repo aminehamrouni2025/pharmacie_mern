@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./Pharmacies.css";
 import axios from "axios";
 import { TbBuildingStore } from "react-icons/tb";
-import pharmaCard from "../../../assets/pharmacy-card.png";
 
 const Pharmacies = () => {
   const [pharmacies, setPharmacies] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pharmaciesPerPage] = useState(4); // 2 rows (2 per row)
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -14,15 +15,9 @@ const Pharmacies = () => {
         const response = await axios.get(
           "http://localhost:5000/api/admin/pharmacies",
           {
-            headers: {
-              Authorization: token,
-            },
+            headers: { Authorization: token },
           }
         );
-
-        // setPharmacies(response.data);
-        console.log(response.data.data);
-        console.log(response.data.msg);
         setPharmacies(response.data.data);
       } catch (error) {
         console.log(error);
@@ -31,26 +26,33 @@ const Pharmacies = () => {
     getPharmacies();
   }, [token]);
 
+  // Pagination Logic
+  const indexOfLastPharmacy = currentPage * pharmaciesPerPage;
+  const indexOfFirstPharmacy = indexOfLastPharmacy - pharmaciesPerPage;
+  const currentPharmacies = pharmacies.slice(
+    indexOfFirstPharmacy,
+    indexOfLastPharmacy
+  );
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
-    <div className="pharmacies-page">
-      <h2>All Pharmacies 🏢</h2>
-      <div className="cards-container">
-        {Array.isArray(pharmacies) ? (
-          pharmacies.map((pharmacy) => (
-            <div key={pharmacy._id} className="pharmacy-card">
-              <div className="pharmacy-title">
-                <h3>
-                  <TbBuildingStore />
-                </h3>
+    <div className="pharmacies">
+      <div className="pharmacies__header">
+        <h2>All Pharmacies 🏥</h2>
+      </div>
+
+      <div className="pharmacies__grid">
+        {currentPharmacies.length > 0 ? (
+          currentPharmacies.map((pharmacy) => (
+            <div key={pharmacy._id} className="pharmacies__card">
+              <div className="pharmacies__card-header">
+                <TbBuildingStore className="pharmacies__icon" />
                 <h3>{pharmacy.name}</h3>
               </div>
-              <img src={pharmaCard} alt="pharma-card" />
-
-              <h3>{pharmacy.address}</h3>
+              <p className="pharmacies__address">{pharmacy.address}</p>
               <iframe
-                width="100%"
-                height="90%"
-                className="map-container-pharmacy"
+                className="pharmacies__map"
                 src={`https://www.google.com/maps?q=${encodeURIComponent(
                   pharmacy.address
                 )}&output=embed`}
@@ -60,7 +62,23 @@ const Pharmacies = () => {
             </div>
           ))
         ) : (
-          <div></div>
+          <p className="pharmacies__no-data">No Pharmacies Found</p>
+        )}
+      </div>
+
+      {/* Pagination */}
+      <div className="pharmacies__pagination">
+        {Array.from(
+          { length: Math.ceil(pharmacies.length / pharmaciesPerPage) },
+          (_, i) => (
+            <button
+              key={i + 1}
+              onClick={() => paginate(i + 1)}
+              className={currentPage === i + 1 ? "active" : ""}
+            >
+              {i + 1}
+            </button>
+          )
         )}
       </div>
     </div>

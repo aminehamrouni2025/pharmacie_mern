@@ -1,3 +1,9 @@
+.admin-profile .profile-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px;
+}
 .profile-card {
   width: 100%;
   background: #f8f9fa;
@@ -7,6 +13,7 @@
   overflow: hidden;
   font-family: "Arial", sans-serif;
   color: #003e29;
+  margin-top : 25px
 }
 
 .profile-left {
