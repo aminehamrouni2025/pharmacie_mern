@@ -29,7 +29,7 @@ const Sidebar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/supplies" className="nav-link">
+          <NavLink to="/admin/supplies" className="nav-link">
             <FaCodePullRequest className="icon" /> Supplies
           </NavLink>
         </li>

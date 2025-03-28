@@ -26,6 +26,9 @@ const supplySchema = new mongoose.Schema(
       enum: ["pending","accepted","not accepted", "delivered"],
       default: "pending", // Default status when request is created
     },
+    name : {
+      type : String
+    }
   },
   { timestamps: true } // Adds createdAt and updatedAt fields
 );

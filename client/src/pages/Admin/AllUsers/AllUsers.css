@@ -1,13 +1,17 @@
 .all-users {
   text-align: center;
+  margin-top: 30px;
 }
 
 .all-users table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
-
+ 
 .all-users th,
 td {
   border: 1px solid #ddd;
@@ -16,7 +20,7 @@ td {
 }
 
 .all-users th {
-  background-color: #4caf50;
+  background-color: #007bff;
   color: white;
 }
 
@@ -25,7 +29,7 @@ td {
 }
 
 .all-users tr:hover {
-  background-color: #ddd;
+  background-color: #ddddddfa;
 }
 
 .all-users button {
@@ -38,19 +42,19 @@ td {
 }
 
 .all-users button:first-child {
-  background-color: cornflowerblue;
-  color: white;
+  background-color: #ffc107;
+ color: black;
 }
 
 .all-users button:last-child {
-  background-color: #f44336;
+  background-color: #E7174A;
   color: white;
 }
 .all-users td img {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  border: 1px solid #4caf50;
+ 
   align-self: center;
 }
 
@@ -81,10 +85,11 @@ td {
 }
 .all-users .users-title .create-btn {
   width: 150px;
+ 
 }
 .all-users .users-title .create-btn button {
   width: 150px;
-  background-color: cornflowerblue;
+  background-color:  green;
 }
 
 /* Modal Background */
@@ -149,4 +154,31 @@ td {
 
  .modal-overlay .submit-btn:hover {
   background: #0056b3;
+}
+/* Pagination */
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.pagination button {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 16px;
+  font-weight: bold;
 }

@@ -16,6 +16,7 @@ import AllUsers from "./pages/Admin/AllUsers/AllUsers";
 import Pharmacies from "./pages/Admin/Pharmacist/Pharmacies";
 import AdminCharts from "./pages/Admin/AdminCharts/AdminCharts";
 import Product from "./pages/Admin/Product/Product";
+import Supplies from "./pages/Admin/Supplies/Supplies";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="allusers" element={<AllUsers />} />
           <Route path="pharmacies" element={<Pharmacies />} />
           <Route path="product" element={<Product />} />
+          <Route path="supplies" element={<Supplies/>} />
           <Route path="" element={AdminCharts} />
         </Route>
       </Route>

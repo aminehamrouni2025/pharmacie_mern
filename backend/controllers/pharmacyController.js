@@ -3,6 +3,7 @@ const Product = require("../models/Product");
 const Supply = require("../models/Supply");
 const User = require("../models/User");
 const mongoose = require("mongoose");
+
 exports.createPharmacy = async (req, res) => {
   try {
     const { id } = req.user;
@@ -306,10 +307,15 @@ exports.createSupply = async (req, res) => {
       return res.status(403).json({ msg: "Only Pharmacists are allowed !!!" });
     }
     const { product, quantity, description } = req.body;
+      const pharmacy = await Pharmacy.findOne({ owner: id });
+      if (!pharmacy) {
+        return res.status(404).json({ msg: "Pharmacy not found" });
+      }
     const newSupply = await Supply.create({
       product,
       quantity,
       description,
+      name : pharmacy.name,
       pharmacist: id,
     });
     return res
