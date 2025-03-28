@@ -1,0 +1,56 @@
+.all-products .product-title h2{
+    color: #003e26;
+    text-align: center;
+}
+
+.all-products .product-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.medicine-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width:350px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  margin: 1rem auto;
+  background-color: #fff;
+}
+
+.medicine-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.medicine-info {
+  padding: 1rem;
+}
+
+.medicine-name {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: #003e26;
+}
+
+.pharmacy-name {
+  font-weight: bold;
+  color: #007B7F;
+  margin-bottom: 0.5rem;
+}
+
+.medicine-description {
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.medicine-details {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  color: #444;
+}

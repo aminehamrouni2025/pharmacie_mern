@@ -15,6 +15,7 @@ import EditProfile from "./pages/Admin/Profile/EditProfile";
 import AllUsers from "./pages/Admin/AllUsers/AllUsers";
 import Pharmacies from "./pages/Admin/Pharmacist/Pharmacies";
 import AdminCharts from "./pages/Admin/AdminCharts/AdminCharts";
+import Product from "./pages/Admin/Product/Product";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="profile/edit" element={<EditProfile />} />
           <Route path="allusers" element={<AllUsers />} />
           <Route path="pharmacies" element={<Pharmacies />} />
+          <Route path="product" element={<Product />} />
           <Route path="" element={AdminCharts} />
         </Route>
       </Route>

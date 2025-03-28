@@ -15,6 +15,8 @@ const {
   getSupplies,
   getSupply,
   updateSupply,
+  getPharmacies,
+  getProducts,
 } = require("../controllers/adminControllers");
 
 router.post("/create-user", verifyToken, checkRole("admin"), createUser);
@@ -41,4 +43,6 @@ router.get("/stats", verifyToken, checkRole("admin"), getStats);
 router.get("/all-supplies", verifyToken, checkRole("admin"), getSupplies);
 router.get("/supply/:id", verifyToken, checkRole("admin"), getSupply);
 router.put("/update-supply/:id", verifyToken, checkRole("admin"), updateSupply);
+router.get("/pharmacies", verifyToken, checkRole("admin"), getPharmacies);
+router.get("/products", verifyToken, checkRole("admin"), getProducts);
 module.exports = router;

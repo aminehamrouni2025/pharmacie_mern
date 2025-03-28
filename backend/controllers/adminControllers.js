@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const Pharmacy = require("../models/Pharmacy");
 const Supply = require("../models/Supply");
+const Product = require("../models/Product");
 const CryptoJS = require("crypto-js");
 
 // user CRUD for admin
@@ -55,7 +56,7 @@ exports.updateUser = async (req, res) => {
         fullName: fullName || user.fullName,
         email: email || user.email,
         address: address || user.address,
-        image: imageUrl 
+        image: imageUrl,
       },
       { new: true }
     );
@@ -242,3 +243,31 @@ exports.updateSupply = async (req, res) => {
     return res.status(500).json({ msg: error });
   }
 };
+
+// ******* Pharmacies routes
+exports.getPharmacies = async (req, res) => {
+  try {
+    if (!req.user || req.user.role !== "admin") {
+      return res.status(403).json({ msg: "Only admins are allowed " });
+    }
+    const pharmacies = await Pharmacy.find();
+    return res.status(201).json({ msg: "All Pharmacies", data: pharmacies });
+  } catch (error) {
+    return res.status(500).json({ msg: error });
+  }
+};
+
+exports.getProducts = async (req, res) => {
+  try {
+    if (!req.user || req.user.role !== "admin") {
+      return res.status(401).json({ msg: "Only admins are allowed !!!" });
+    }
+    const products = await Product.find();
+
+    return res.status(201).json({ msg: "All Products", data: products });
+  } catch (error) {
+    return res.status(500).json({ msg: error });
+  }
+};
+
+

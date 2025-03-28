@@ -1,0 +1,47 @@
+.pharmacies-page {
+  width: 100%;
+  height: auto;
+}
+.pharmacies-page h2 {
+   
+  text-align: center;
+  font-weight: bold;
+}
+.pharmacies-page .cards-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.pharmacies-page .pharmacy-card {
+  width: 25%;
+  /* border: 1px solid black; */
+  height: 450px;
+  margin: 5px;
+  padding: 5px;
+  box-shadow: 0 4px 6px #003e26;
+  background: white;
+  border-radius: 15px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.pharmacy-card .pharmacy-title {
+  display: flex;
+}
+.pharmacy-title h3 {
+  /* color: #003e26; */
+  font-size: 22px;
+  text-align: center;
+  padding: 5px;
+  margin: 5px;
+}
+.pharmacy-card img {
+    width: 80px;
+    height: 110px;
+}
+.pharmacy-card .map-container-pharmacy {
+  height: 200px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}

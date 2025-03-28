@@ -24,7 +24,7 @@ const Sidebar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/all-products" className="nav-link">
+          <NavLink to="/admin/product" className="nav-link">
             <GiMedicines className="icon" /> Products
           </NavLink>
         </li>
