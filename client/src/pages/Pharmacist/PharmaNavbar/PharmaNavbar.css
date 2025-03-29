@@ -1,0 +1,46 @@
+.pharma__navbar {
+  /* background-color: #fff !important; */
+  width: 98%;
+  height: 60px;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 10px;
+ 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+}
+.pharma__navbar .pharmacist-navbar {
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+.pharma__navbar .pharmacist-navbar h1 {
+  padding: 5px;
+  margin: 5px;
+}
+.pharma__navbar .pharmacist-navbar h1,
+h2 {
+  padding: 5px;
+  margin: 5px;
+  color: cornflowerblue;
+  font-weight: 500;
+}
+.pharma__navbar .pharmacy-btn {
+    width: 250px;
+ 
+    display: flex;
+    justify-content: space-around;
+    background: none;
+}
+.pharma__navbar .pharmacy-btn button {
+   
+    border: transparent;
+}
+.pharma__navbar .pharmacy-btn h3 {
+  font-size: 26px;
+   color: cornflowerblue
+}
+
+

@@ -94,7 +94,7 @@ td {
 
 /* Modal Background */
 /* Modal Overlay */
- .modal-overlay {
+ .all-users .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -108,7 +108,7 @@ td {
 }
 
 /* Modal Box */
- .modal-overlay .modal-content {
+.all-users .modal-overlay .modal-content {
   background: white;
   padding: 20px;
   border-radius: 10px;
@@ -118,7 +118,7 @@ td {
 }
 
 /* Modal Header */
- .modal-overlay  .modal-header {
+.all-users .modal-overlay  .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -126,13 +126,13 @@ td {
 }
 
 /* Close Button */
- .modal-overlay  .close-icon {
+ .all-users .modal-overlay  .close-icon {
   cursor: pointer;
   font-size: 20px;
 }
 
 /* Input Fields */
- .modal-overlay .modal-body input {
+ .all-users .modal-overlay .modal-body input {
   width: 90%;
   padding: 10px;
   margin: 8px 0;
@@ -141,7 +141,7 @@ td {
 }
 
 /* Submit Button */
- .modal-overlay .submit-btn {
+ .all-users .modal-overlay .submit-btn {
   width: 50%;
   padding: 10px;
   background: #007bff !important;
@@ -152,11 +152,11 @@ td {
   margin-top: 10px;
 }
 
- .modal-overlay .submit-btn:hover {
+ .all-users .modal-overlay .submit-btn:hover {
   background: #0056b3;
 }
 /* Pagination */
-.pagination {
+.all-users .pagination {
   margin-top: 20px;
   display: flex;
   justify-content: center;
@@ -164,7 +164,7 @@ td {
   gap: 10px;
 }
 
-.pagination button {
+.all-users .pagination button {
   padding: 8px 12px;
   background-color: #007bff;
   color: white;
@@ -173,12 +173,12 @@ td {
   cursor: pointer;
 }
 
-.pagination button:disabled {
+.all-users .pagination button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
 }
 
-.pagination span {
+.all-users .pagination span {
   font-size: 16px;
   font-weight: bold;
 }

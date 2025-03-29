@@ -91,6 +91,7 @@ const Pharmacies = () => {
               key={i + 1}
               onClick={() => paginate(i + 1)}
               className={currentPage === i + 1 ? "active" : ""}
+              id="pharmacies-bt"
             >
               {i + 1}
             </button>
