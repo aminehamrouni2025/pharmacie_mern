@@ -53,7 +53,7 @@
   font-size: 14px;
   text-align: center;
 }
-.admin-navbar .dropdown-menu button {
+.admin-navbar .dropdown-menu #dropdown-btn {
     background-color: #003e29;
     color: #f0f0f0;
     width: 90%;

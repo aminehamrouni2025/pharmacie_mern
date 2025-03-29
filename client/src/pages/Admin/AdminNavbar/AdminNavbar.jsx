@@ -53,7 +53,7 @@ const AdminNavbar = () => {
           <Link to="profile" className="dropdown-item">
             Profile
           </Link>
-          <button onClick={logout} className="dropdown-item">
+          <button onClick={logout} className="dropdown-item" id="dropdown-btn">
             Logout
           </button>
         </div>
