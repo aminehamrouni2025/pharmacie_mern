@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./Pharmacies.css";
 import axios from "axios";
 import { TbBuildingStore } from "react-icons/tb";
+import { CiSearch } from "react-icons/ci"; // Import search icon
 
 const Pharmacies = () => {
   const [pharmacies, setPharmacies] = useState([]);
+  const [searchPharmacy, setSearchPharmacy] = useState(""); // Search state
   const [currentPage, setCurrentPage] = useState(1);
-  const [pharmaciesPerPage] = useState(4); // 2 rows (2 per row)
+  const pharmaciesPerPage = 4; // 2 rows (2 per row)
   const token = localStorage.getItem("token");
 
   useEffect(() => {
@@ -26,10 +28,15 @@ const Pharmacies = () => {
     getPharmacies();
   }, [token]);
 
-  // Pagination Logic
+  // Filter pharmacies before pagination
+  const filteredPharmacies = pharmacies.filter((pharmacy) =>
+    pharmacy.name.toLowerCase().includes(searchPharmacy.toLowerCase())
+  );
+
+  // Pagination Logic (after filtering)
   const indexOfLastPharmacy = currentPage * pharmaciesPerPage;
   const indexOfFirstPharmacy = indexOfLastPharmacy - pharmaciesPerPage;
-  const currentPharmacies = pharmacies.slice(
+  const currentPharmacies = filteredPharmacies.slice(
     indexOfFirstPharmacy,
     indexOfLastPharmacy
   );
@@ -39,6 +46,15 @@ const Pharmacies = () => {
   return (
     <div className="pharmacies">
       <div className="pharmacies__header">
+        <div className="input-search">
+          <CiSearch className="search-icon" />
+          <input
+            type="text"
+            placeholder="Search for a pharmacy"
+            value={searchPharmacy}
+            onChange={(e) => setSearchPharmacy(e.target.value)}
+          />
+        </div>
         <h2>All Pharmacies 🏥</h2>
       </div>
 
@@ -69,7 +85,7 @@ const Pharmacies = () => {
       {/* Pagination */}
       <div className="pharmacies__pagination">
         {Array.from(
-          { length: Math.ceil(pharmacies.length / pharmaciesPerPage) },
+          { length: Math.ceil(filteredPharmacies.length / pharmaciesPerPage) },
           (_, i) => (
             <button
               key={i + 1}

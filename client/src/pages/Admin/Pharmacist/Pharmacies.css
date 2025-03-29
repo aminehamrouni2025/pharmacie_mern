@@ -4,6 +4,32 @@
   background-color: #f8f9fa;
   text-align: center;
 }
+.pharmacies__header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.pharmacies__header .input-search {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.pharmacies__header .search-icon {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.pharmacies__header .input-search input {
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-size: 16px;
+}
 
 .pharmacies__header h2 {
   font-size: 24px;

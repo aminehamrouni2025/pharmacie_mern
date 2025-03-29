@@ -6,7 +6,6 @@ import UpdateUser from "./UpdateUser";
 import CreateUser from "./CreateUser";
 import { ToastContainer, toast } from "react-toastify";
 
-
 const AllUsers = () => {
   const [users, setUsers] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +17,8 @@ const AllUsers = () => {
     role: "",
     address: "",
   });
+  const [searchUser, setSearchUser] = useState("");
+  console.log(searchUser);
   const [newUserModal, setNewUserModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const usersPerPage = 5; // Number of users per page
@@ -66,10 +67,13 @@ const AllUsers = () => {
     setSelectedUser(user); // Set the user being updated
     setIsOpen(true);
   };
+  const filteredUsers = users.filter((user) =>
+    user.fullName.toLowerCase().includes(searchUser.toLowerCase())
+  );
   // Pagination Logic
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
 
   const totalPages = Math.ceil(users.length / usersPerPage);
   return (
@@ -83,7 +87,11 @@ const AllUsers = () => {
               <CiSearch />
             </h1>
 
-            <input type="text" placeholder="Search for a client" />
+            <input
+              type="text"
+              placeholder="Search for a client"
+              onChange={(e) => setSearchUser(e.target.value)}
+            />
           </div>
         </div>
         <h2>All Users</h2>
@@ -124,7 +132,12 @@ const AllUsers = () => {
               </tr>
             ))
           ) : (
-            <h1> No USers Found</h1>
+            // ✅ Wrap <td> inside <tr> to prevent errors
+            <tr>
+              <td colSpan="5" style={{ textAlign: "center" }}>
+                No Users Found
+              </td>
+            </tr>
           )}
         </tbody>
       </table>
