@@ -1,7 +1,50 @@
-.pharmacist__sidebar {
-    width: 95%;
-    background-color: cornflowerblue;
-    height: 90vh;
-    border-radius: 25px;
-    margin: 25px;
+/* Sidebar.css */
+.pharmacist-sidebar {
+
+  height: 100vh;
+  background: cornflowerblue;
+  color: white;
+  padding: 15px;
+    display: flex;
+  flex-direction: column;
+  border-radius: 15px;
 }
+
+.pharmacist-sidebar-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  
+}
+
+.pharmacist-sidebar-menu {
+  list-style: none;
+  padding: 0;
+}
+
+.pharmacist-sidebar-menu li {
+  margin: 10px 0;
+}
+
+.pharmacist-nav-link {
+  display: flex;
+  /* align-items: center; */
+  gap: 10px;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.pharmacist-nav-link:hover,
+.nav-link.active {
+  background: rgb(3, 183, 3);
+}
+
+.pharmacist-icon {
+  font-size: 18px;
+}
+
+

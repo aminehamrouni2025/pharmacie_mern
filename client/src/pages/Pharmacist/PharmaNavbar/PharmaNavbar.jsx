@@ -16,20 +16,9 @@ const PharmaNavbar = () => {
       </div>
       <div className="pharmacy-btn ">
         <button>
-          <h3>
-            <BsFillFileEarmarkPersonFill />
-          </h3>
+          <img className="pharmacist-logo"/>
         </button>
-        <button>
-          <h3>
-            <IoSettings />
-          </h3>
-        </button>
-        <button>
-          <h3>
-            <IoIosNotifications />
-          </h3>
-        </button>
+       
       </div>
     </div>
   );

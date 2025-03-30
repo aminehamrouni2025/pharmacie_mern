@@ -22,8 +22,8 @@
 }
 .pharma__navbar .pharmacist-navbar h1,
 h2 {
-  padding: 5px;
-  margin: 5px;
+  /* padding: 5px;
+  margin: 5px; */
   color: cornflowerblue;
   font-weight: 500;
 }
@@ -35,12 +35,16 @@ h2 {
     background: none;
 }
 .pharma__navbar .pharmacy-btn button {
-   
-    border: transparent;
+  border: transparent;
+  background-color: transparent;
 }
-.pharma__navbar .pharmacy-btn h3 {
-  font-size: 26px;
-   color: cornflowerblue
+.pharma__navbar .pharmacy-btn img {
+   width: 45px;
+   height: 45px;
+   border: 1px solid black;
+   border-radius: 50%;
+     
 }
+ 
 
 
