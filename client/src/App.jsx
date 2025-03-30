@@ -17,6 +17,7 @@ import Pharmacies from "./pages/Admin/Pharmacist/Pharmacies";
 import AdminCharts from "./pages/Admin/AdminCharts/AdminCharts";
 import Product from "./pages/Admin/Product/Product";
 import Supplies from "./pages/Admin/Supplies/Supplies";
+import PharmacistProduct from "./pages/Pharmacist/PharmacistProduct/PharmacistProduct";
 
 function App() {
   return (
@@ -39,13 +40,15 @@ function App() {
           <Route path="allusers" element={<AllUsers />} />
           <Route path="pharmacies" element={<Pharmacies />} />
           <Route path="product" element={<Product />} />
-          <Route path="supplies" element={<Supplies/>} />
+          <Route path="supplies" element={<Supplies />} />
           <Route path="" element={AdminCharts} />
         </Route>
       </Route>
 
       <Route element={<ProtectedRoute allowedRoles={["pharmacist"]} />}>
-        <Route path="/pharmacist" element={<PharmacistDashboard />} />
+        <Route path="/pharmacist" element={<PharmacistDashboard />}>
+          <Route path="product" element={<PharmacistProduct />} />
+        </Route>
       </Route>
 
       <Route element={<ProtectedRoute allowedRoles={["client"]} />}>

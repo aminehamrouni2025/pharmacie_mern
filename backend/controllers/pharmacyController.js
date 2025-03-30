@@ -4,6 +4,21 @@ const Supply = require("../models/Supply");
 const User = require("../models/User");
 const mongoose = require("mongoose");
 
+exports.getProfile = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!req.user || req.user.role !== "pharmacist") {
+      return res.status(403).json({ msg: "Only Pharmacists are allowed !!!" });
+    }
+    const pharmacistProfile = await User.findById(id);
+    if(!pharmacistProfile) {
+      return res.status(404).json({msg : "Something went wrong "})
+    }
+    return res.status(201).json({ msg: "My Profile", data: pharmacistProfile });
+  } catch (error) {
+    res.status(500).json({ message: "Server Error", error: error.message });
+  }
+};
 exports.createPharmacy = async (req, res) => {
   try {
     const { id } = req.user;

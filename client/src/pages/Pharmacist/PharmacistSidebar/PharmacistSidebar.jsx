@@ -14,22 +14,22 @@ const PharmacistSidebar = () => {
         
 
         <li>
-          <NavLink to="/" className="pharmacist-nav-link">
+          <NavLink to="/pharmacist" className="pharmacist-nav-link">
             <SiHomeassistantcommunitystore className="icon" /> Dashboard
           </NavLink>
         </li>
         <li>
-          <NavLink to="/ " className="pharmacist-nav-link">
+          <NavLink to="/pharmacist/product " className="pharmacist-nav-link">
             <GiMedicines className="pharmacist-icon" /> Products
           </NavLink>
         </li>
         <li>
-          <NavLink to="/" className="pharmacist-nav-link">
+          <NavLink to="/supplies" className="pharmacist-nav-link">
             <FaCodePullRequest className="pharmacist-icon" /> Supplies
           </NavLink>
         </li>
         <li>
-          <NavLink to="/" className="pharmacist-nav-link">
+          <NavLink to="/orders" className="pharmacist-nav-link">
             <FaShoppingCart className="pharmacist-icon" /> Orders
           </NavLink>
         </li>

@@ -3,6 +3,8 @@ import "./PharmacistDashboard.css";
 import PharmaNavbar from "./PharmaNavbar/PharmaNavbar";
 import PharmacistSidebar from "./PharmacistSidebar/PharmacistSidebar";
 import PharmaStats from "./PharmaStats/PharmaStats";
+import { Outlet, useLocation } from "react-router";
+
 const PharmacistDashboard = () => {
   return (
     <div className="dashboard-all">
@@ -16,7 +18,9 @@ const PharmacistDashboard = () => {
         <div className="pharma-cards">
           <PharmaStats/>
         </div>
-        <div className="pharma-content">4</div>
+        <div className="pharma-content">
+          <Outlet/>
+        </div>
       </div>
     </div>
   );
