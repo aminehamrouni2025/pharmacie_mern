@@ -1,13 +1,14 @@
 /* Sidebar.css */
 .pharmacist-sidebar {
-
-  height: 100vh;
-  background: cornflowerblue;
+  height: 90vh;
+  background: #003e26;
   color: white;
   padding: 15px;
-    display: flex;
+  display: flex;
   flex-direction: column;
   border-radius: 15px;
+  width:250px;
+  margin: 20px;
 }
 
 .pharmacist-sidebar-title {
@@ -15,7 +16,6 @@
   font-weight: bold;
   margin-bottom: 10px;
   text-align: center;
-  
 }
 
 .pharmacist-sidebar-menu {
@@ -37,14 +37,10 @@
   font-size: 16px;
   border-radius: 5px;
 }
-
 .pharmacist-nav-link:hover,
-.nav-link.active {
+.pharmacist-nav-link.active {
   background: rgb(3, 183, 3);
 }
-
 .pharmacist-icon {
   font-size: 18px;
 }
-
-
