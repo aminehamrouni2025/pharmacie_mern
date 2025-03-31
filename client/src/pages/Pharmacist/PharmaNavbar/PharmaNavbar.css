@@ -20,8 +20,13 @@
   padding: 5px;
   margin: 5px;
 }
-.pharma__navbar .pharmacist-navbar h1,
-h2 {
+.pharma__navbar .pharmacist-navbar h1{
+  /* padding: 5px;
+  margin: 5px; */
+  color: #003e26;
+  font-weight: 500;
+}
+.pharma__navbar .pharmacist-navbar h2 {
   /* padding: 5px;
   margin: 5px; */
   color: #003e26;
@@ -41,7 +46,7 @@ h2 {
 .pharma__navbar .pharmacy-btn img {
    width: 45px;
    height: 45px;
-   border: 1px solid black;
+   /* border: 1px solid black; */
    border-radius: 50%;
      
 }

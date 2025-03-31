@@ -1,0 +1,110 @@
+.pharmacist_charts {
+  width: 95%;
+
+  height: auto;
+
+  background-color: #fff;
+  padding: 10px;
+}
+
+.pharmacist_charts h4 {
+  text-align: center !important;
+  color: #003e26;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.pharmacist_charts .charts-content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.pharmacist_charts .charts-image {
+  width: 35%;
+}
+.pharmacist_charts .charts-image img {
+  width: 100%;
+}
+.pharmacist_charts .charts-create {
+  width: 60%;
+}
+
+.pharmacist_charts .charts-create .charts-create-inputs {
+  display: flex;
+  flex-direction: column;
+  /* width: 50%; */
+  align-self: center;
+  align-items: center;
+}
+.pharmacist_charts .charts-create .charts-create-inputs h3 {
+  color: #003e26;
+}
+.pharmacist_charts .charts-create .charts-create-inputs input {
+  width: 350px;
+  height: 40px;
+  border-radius: 15px;
+  margin: 10px;
+  padding: 10px;
+  border: transparent;
+  background-color: rgb(243, 240, 236);
+}
+
+.pharmacist_charts .charts-create .charts-create-inputs button {
+  width: 200px;
+  height: 45px;
+  margin: 20px;
+  border-radius: 20px;
+  border: transparent;
+  background-color: #003e26;
+  color: white;
+}
+.pharmacist_charts .charts-create .charts-create-info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.pharmacist_charts .charts-create .charts-create-info h2 {
+  margin: 10px;
+  color: #003e26;
+  font-size: 24px; 
+}
+.pharmacist_charts .charts-create .charts-create-info p {
+  margin: 10px;
+  color: #000;
+  font-size: 20px; 
+  font-weight: bold;
+}
+.pharmacist_charts .charts-create .charts-create-info iframe {
+    width: 450px;
+    height: 200px;
+    margin: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.pharmacist_charts .charts-create .charts-create-info .create-info-btn {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: space-around;
+}
+.pharmacist_charts .charts-create .charts-create-info .create-info-btn button {
+   margin: 10px;
+   padding: 10px;
+   width: 150px;
+   border: transparent;
+   border-radius: 20px;
+}
+.pharmacist_charts .charts-create .charts-create-info .create-info-btn  #delete {
+    color: white;
+    background-color: red;
+    font-size: 18px;
+    font-weight: bold;
+}
+.pharmacist_charts .charts-create .charts-create-info .create-info-btn  #edit {
+    color: white;
+    background-color: green;
+     font-size: 18px;
+    font-weight: bold;
+}
+
+

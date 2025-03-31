@@ -28,7 +28,7 @@ const PharmaNavbar = () => {
     if (pharmacistId && token) fetchProfile();
   }, [pharmacistId, token]);
   //
-  console.log(profile);
+ 
 
   const logout = () => {
     localStorage.removeItem("token");

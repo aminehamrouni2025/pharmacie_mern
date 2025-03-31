@@ -9,6 +9,7 @@ const {
   createSupply,
   getSupplyPharmacy,
   getProfile,
+  getPharmacyByOwner,
 } = require("../controllers/pharmacyController");
 const { verifyToken, checkRole } = require("../middlewares/authMiddleware");
 const upload = require("../middlewares/upload");
@@ -62,9 +63,10 @@ router.get(
   getSupplyPharmacy
 );
 router.get(
-  "/profile/:id",
+  "/pharmacy",
   verifyToken,
   checkRole("pharmacist"),
-  getProfile
+  getPharmacyByOwner
 );
+router.get("/profile/:id", verifyToken, checkRole("pharmacist"), getProfile);
 module.exports = router;

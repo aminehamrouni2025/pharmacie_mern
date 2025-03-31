@@ -19,6 +19,28 @@ exports.getProfile = async (req, res) => {
     res.status(500).json({ message: "Server Error", error: error.message });
   }
 };
+
+// exports.findPharmacy = async(req,res)=>{
+// Backend: Check if pharmacist has a pharmacy
+exports.getPharmacyByOwner = async (req, res) => {
+  try {
+    if (!req.user || req.user.role !== "pharmacist") {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
+
+    const pharmacy = await Pharmacy.findOne({ owner: req.user.id });
+    if (!pharmacy) {
+      return res.status(404).json({ message: "No pharmacy found" });
+    }
+
+    res.status(200).json(pharmacy);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+
+
 exports.createPharmacy = async (req, res) => {
   try {
     const { id } = req.user;
