@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router";
-import { FaShoppingCart  } from "react-icons/fa";
+import { FaShoppingCart } from "react-icons/fa";
 import { FaCodePullRequest } from "react-icons/fa6";
 import { GiMedicines } from "react-icons/gi";
 import { SiHomeassistantcommunitystore } from "react-icons/si";
@@ -23,12 +23,12 @@ const PharmacistSidebar = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/pharmacist/product " className="pharmacist-nav-link">
+          <NavLink to="/pharmacist/inventory " className="pharmacist-nav-link">
             <MdOutlineInventory className="pharmacist-icon" /> Inventory
           </NavLink>
         </li>
         <li>
-          <NavLink to="/supplies" className="pharmacist-nav-link">
+          <NavLink to="/pharmacist/supply" className="pharmacist-nav-link">
             <FaCodePullRequest className="pharmacist-icon" /> Supplies
           </NavLink>
         </li>

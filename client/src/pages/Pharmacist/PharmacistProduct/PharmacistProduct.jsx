@@ -3,25 +3,19 @@ import "./PharmacistProduct.css";
 import { CiSearch } from "react-icons/ci";
 import axios from "axios";
 import CreateProduct from "./CreateProduct";
+import EditProduct from "./EditProduct";
 
 const PharmacistProduct = () => {
   const [products, setProducts] = useState([]);
-  const [productData, setProductData] = useState({
-    name: "",
-    description: "",
-    price: 0,
-    category: "",
-    stock: 0,
-    expiry: "",
-    image: "",
-  });
-   const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 4; // Number of products per page
+  const [editModal, setEditModal] = useState(false);
+  const [editProductData, setEditProductData] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 4;
+  const [searchProduct, setSearchProduct] = useState("");
   const [productModal, setProductModal] = useState(false);
-    const [searchProduct, setSearchProduct] = useState(""); // Search state
-  
+
   const token = localStorage.getItem("token");
-  // Get all products
+
   const handleModal = () => {
     setProductModal(!productModal);
   };
@@ -32,9 +26,7 @@ const PharmacistProduct = () => {
         const response = await axios.get(
           "http://localhost:5000/api/pharmacies/all-products",
           {
-            headers: {
-              Authorization: token,
-            },
+            headers: { Authorization: token },
           }
         );
         console.log(response.data);
@@ -45,35 +37,60 @@ const PharmacistProduct = () => {
     };
     getAllProducts();
   }, [token]);
-    const filteredProducts = products.filter((product) =>
-      product.name.toLowerCase().includes(searchProduct.toLowerCase())
-    );
-const indexOfLastProduct = currentPage * productsPerPage;
-const indexOfFirstUser = indexOfLastProduct - productsPerPage;
-const currentProducts = filteredProducts.slice(indexOfFirstUser, indexOfLastProduct);
-  const totalPages = Math.ceil(products.length / productsPerPage);
+
+  const handleEdit = (product) => {
+    setEditProductData(product);
+    setEditModal(true);
+  };
+
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this product ?")) {
+      try {
+        await axios.delete(
+          `http://localhost:5000/api/pharmacies/delete-product/${id}`,
+          {
+            headers: { Authorization: token },
+          }
+        );
+        setProducts(products.filter((product) => product._id !== id));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchProduct.toLowerCase())
+  );
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
   return (
     <div className="product-container">
       <div className="product-topbar">
-        {/* search field */}
-
         <div className="product-topbar-search">
           <CiSearch className="topbar-search-icon" />
-          <input type="text" placeholder="Search for a product" />
+          <input
+            type="text"
+            placeholder="Search for a product"
+            value={searchProduct}
+            onChange={(e) => setSearchProduct(e.target.value)}
+          />
         </div>
         <h2>All Products</h2>
-        {/* create field */}
         <div className="topbar-create">
           <button onClick={handleModal}>Create Product</button>
         </div>
       </div>
+
       <div className="product-content-bar">
-        <table
-          border="1"
-          cellPadding="5"
-          style={{ width: "100%", borderCollapse: "collapse" }}
-        >
+        <table className="pharmacist-product__table">
           <thead>
             <tr>
               <th>Product</th>
@@ -87,11 +104,15 @@ const currentProducts = filteredProducts.slice(indexOfFirstUser, indexOfLastProd
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(currentProducts) && currentProducts.length > 0 ? (
+            {currentProducts.length > 0 ? (
               currentProducts.map((product) => (
                 <tr key={product._id}>
                   <td>
-                    <img src={product.image} />
+                    <img
+                      src={product.image}
+                      className="product-img"
+                      alt="Product"
+                    />
                   </td>
                   <td>{product.name}</td>
                   <td>{product.category}</td>
@@ -110,13 +131,13 @@ const currentProducts = filteredProducts.slice(indexOfFirstUser, indexOfLastProd
                   <td>
                     <button
                       className="table-button"
-                      // onClick={() => handleEdit(product)}
+                      onClick={() => handleEdit(product)}
                     >
                       Edit
                     </button>
                     <button
                       className="table-button"
-                      // onClick={() => handleDelete(product._id)}
+                      onClick={() => handleDelete(product._id)}
                     >
                       Delete
                     </button>
@@ -125,7 +146,7 @@ const currentProducts = filteredProducts.slice(indexOfFirstUser, indexOfLastProd
               ))
             ) : (
               <tr>
-                <td className="product-content-title">
+                <td colSpan="8" className="product-content-title">
                   No Products found. Please start creating
                 </td>
               </tr>
@@ -133,6 +154,7 @@ const currentProducts = filteredProducts.slice(indexOfFirstUser, indexOfLastProd
           </tbody>
         </table>
       </div>
+
       <div className="pagination">
         <button
           disabled={currentPage === 1}
@@ -151,14 +173,20 @@ const currentProducts = filteredProducts.slice(indexOfFirstUser, indexOfLastProd
           Next
         </button>
       </div>
-      {productModal ? (
+
+      {productModal && (
         <CreateProduct
-          setProductData={setProductData}
-          productData={productData}
           setProductModal={setProductModal}
-          setProducts={setProducts} // Pass the function
+          setProducts={setProducts}
         />
-      ) : null}
+      )}
+      {editModal && (
+        <EditProduct
+          product={editProductData}
+          setEditModal={setEditModal}
+          setProducts={setProducts}
+        />
+      )}
     </div>
   );
 };

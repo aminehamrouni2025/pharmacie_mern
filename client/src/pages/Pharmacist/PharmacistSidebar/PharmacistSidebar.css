@@ -1,6 +1,6 @@
 /* Sidebar.css */
 .pharmacist-sidebar {
-  height: 100%;
+  height:100vh;
   background: #003e26;
   color: white;
   padding: 15px;

@@ -1,0 +1,56 @@
+.inventory-container {
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.inventory-title {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.inventory-table th,
+.inventory-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.inventory-table th {
+  background-color: #007bff;
+  color: white;
+}
+
+.inventory-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.error-message {
+  color: red;
+}
+
+.no-inventory {
+  font-size: 16px;
+  color: gray;
+}
+
+.download-btn {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.download-btn:hover {
+  background-color: #218838;
+}

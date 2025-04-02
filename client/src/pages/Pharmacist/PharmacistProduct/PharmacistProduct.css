@@ -62,7 +62,7 @@ td {
   background-color: #007bff;
   color: white;
 }
-.product-container img {
+.product-container .product-img {
     width: 150px;
 }
 .product-container tr:nth-child(even) {
