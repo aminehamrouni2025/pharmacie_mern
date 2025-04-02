@@ -1,0 +1,192 @@
+.product-container {
+  max-width: 95%;
+  height: auto;
+}
+.product-container .product-topbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+.product-topbar .product-topbar-search {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 20px;
+}
+.product-topbar .product-topbar-search .topbar-search-icon {
+  font-size: 20px;
+  padding: 5px;
+}
+.product-topbar .product-topbar-search input {
+  border: transparent;
+  width: 250px;
+  padding: 5px;
+}
+.product-container h2 {
+  color: #003e26;
+}
+.product-container .topbar-create button {
+  background-color: #003e26;
+  width: 200px;
+  padding: 10px;
+  border: transparent;
+  color: white;
+  border-radius: 20px;
+}
+
+.product-container .product-content-title td {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  color: rgb(255, 31, 31);
+  margin: 25px;
+}
+.product-container table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+.product-container th,
+td {
+  border: 1px solid #ddd;
+  padding: 5px;
+  text-align: center;
+}
+.product-container th {
+  background-color: #007bff;
+  color: white;
+}
+.product-container .product-img {
+    width: 150px;
+}
+.product-container tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.product-container tr:hover {
+  background-color: #ddddddfa;
+}
+
+.product-container .table-button {
+  padding: 5px 10px;
+  margin: 5px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 60px;
+}
+
+.product-container .table-button:first-child {
+  background-color: #ffc107;
+ color: black;
+}
+
+.product-container .table-button:last-child {
+  background-color: #E7174A;
+  color: white;
+}
+
+/* modal create product */
+/* Modal Overlay */
+  .create-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal Box */
+ .create-modal-overlay .create-modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  text-align: center;
+}
+
+/* Modal Header */
+  .create-modal-overlay  .create-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* Close Button */
+ .create-modal-overlay  .create-close-icon {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Input Fields */
+  .create-modal-overlay .create-modal-body input {
+  width: 90%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+  .create-modal-overlay .create-modal-body .create-input-field {
+  width: 90%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Submit Button */
+  .create-modal-overlay .create-submit-btn {
+  width: 50%;
+  padding: 10px;
+  background: #007bff !important;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+  .create-modal-overlay .create-submit-btn:hover {
+  background: #0056b3;
+}
+
+/* Pagination */
+.product-container .pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.product-container .pagination button {
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.product-container .pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.product-container .pagination span {
+  font-size: 16px;
+  font-weight: bold;
+}

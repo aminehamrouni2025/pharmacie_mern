@@ -18,6 +18,8 @@ import AdminCharts from "./pages/Admin/AdminCharts/AdminCharts";
 import Product from "./pages/Admin/Product/Product";
 import Supplies from "./pages/Admin/Supplies/Supplies";
 import PharmacistProduct from "./pages/Pharmacist/PharmacistProduct/PharmacistProduct";
+import PharmacistInventory from "./pages/Pharmacist/PharmacistInventory/PharmacistInventory";
+import PharmacistSupply from "./pages/Pharmacist/PharmacistSupply/PharmacistSupply";
 
 function App() {
   return (
@@ -48,6 +50,8 @@ function App() {
       <Route element={<ProtectedRoute allowedRoles={["pharmacist"]} />}>
         <Route path="/pharmacist" element={<PharmacistDashboard />}>
           <Route path="product" element={<PharmacistProduct />} />
+          <Route path="inventory" element={<PharmacistInventory />} />
+          <Route path="supply" element={<PharmacistSupply />} />
         </Route>
       </Route>
 
