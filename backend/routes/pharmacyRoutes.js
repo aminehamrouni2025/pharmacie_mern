@@ -10,6 +10,8 @@ const {
   getSupplyPharmacy,
   getProfile,
   getPharmacyByOwner,
+  getAllSupplies,
+  getPharmacistStats,
 } = require("../controllers/pharmacyController");
 const { verifyToken, checkRole } = require("../middlewares/authMiddleware");
 const upload = require("../middlewares/upload");
@@ -69,4 +71,6 @@ router.get(
   getPharmacyByOwner
 );
 router.get("/profile/:id", verifyToken, checkRole("pharmacist"), getProfile);
+router.get("/supplies", verifyToken, checkRole("pharmacist"), getAllSupplies);
+router.get("/stats", verifyToken, checkRole("pharmacist"), getPharmacistStats);
 module.exports = router;

@@ -42,7 +42,7 @@ function LandingPage() {
             <CiLock />
           </h3>
           <h3 className="link-title">
-            <Link to='/login' >Sign Up</Link>{" "}
+            <Link to="/login">Sign Up</Link>{" "}
           </h3>
         </div>
         <div className="panier">
@@ -88,7 +88,7 @@ function LandingPage() {
       {/* title & swipe part */}
       <section className="swipe">
         <div className="title-swipe">
-          <h1>The best pharmacy online in tunisia</h1>
+          <h1>The best online pharmacy in tunisia</h1>
         </div>
         <Carousel />
       </section>

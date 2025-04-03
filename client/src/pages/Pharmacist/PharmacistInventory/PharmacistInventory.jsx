@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import * as XLSX from "xlsx";
 import "./PharmacistInventory.css";
-
+import pharmacyImg from '../../../assets/1.png'
 const PharmacistInventory = () => {
   const [inventory, setInventory] = useState([]);
   const [error, setError] = useState("");
@@ -57,34 +57,41 @@ const PharmacistInventory = () => {
   return (
     <div className="inventory-container">
       <h2 className="inventory-title">📦 Pharma Connect - Inventory</h2>
-      {error && <p className="error-message">{error}</p>}
+      <div className="inventory-content">
+        <div>
+          <img src={pharmacyImg} />
+        </div>
+        <div>
+          {error && <p className="error-message">{error}</p>}
 
-      {inventory.length > 0 ? (
-        <>
-          <table className="inventory-table">
-            <thead>
-              <tr>
-                <th>📝 Name</th>
-                <th>📦 Quantity</th>
-              </tr>
-            </thead>
-            <tbody>
-              {inventory.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.name}</td>
-                  <td>{item.quantity}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          {inventory.length > 0 ? (
+            <>
+              <table className="inventory-table">
+                <thead>
+                  <tr>
+                    <th>📝 Name</th>
+                    <th>📦 Quantity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {inventory.map((item, index) => (
+                    <tr key={index}>
+                      <td>{item.name}</td>
+                      <td>{item.quantity}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
 
-          <button className="download-btn" onClick={downloadExcel}>
-            📥 Download Excel
-          </button>
-        </>
-      ) : (
-        <p className="no-inventory">⚠️ No inventory available.</p>
-      )}
+              <button className="download-btn" onClick={downloadExcel}>
+                📥 Download Excel
+              </button>
+            </>
+          ) : (
+            <p className="no-inventory">⚠️ No inventory available.</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

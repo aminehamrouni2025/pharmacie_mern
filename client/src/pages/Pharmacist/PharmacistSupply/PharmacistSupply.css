@@ -1,0 +1,77 @@
+.supply-pharmacy .supply-pharmacy-title {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.supply-pharmacy .supply-pharmacy-title h3 {
+    color: #003e26;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.supply-pharmacy .supply-pharmacy-title button {
+   width: 250px;
+   height: 45px;
+   padding: 10px;
+   border: transparent;
+   border-radius: 15px;
+   background-color: #003e26;
+   color: white;
+}
+
+.supply-pharmacy .supply-table {
+  width: 98%;
+  border-collapse: collapse;
+  margin-top: 20px;
+ 
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+ 
+}
+
+.supply-pharmacy .supply-table th, .supply-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.supply-pharmacy .supply-table th {
+  background-color: #007bff;
+  text-align: center;
+  color: white;
+}
+
+.supply-pharmacy .status-pending {
+  background-color: orange;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.supply-pharmacy .status-accepted {
+  background-color: green;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.supply-pharmacy .status-not-accepted {
+  background-color: red;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.supply-pharmacy .status-delivered {
+  background-color: blue;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+}

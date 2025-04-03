@@ -81,10 +81,10 @@ const PharmacistCharts = () => {
                 allowFullScreen
                 loading="lazy"
               ></iframe>
-              <div className="create-info-btn">
+              {/* <div className="create-info-btn">
                 <button id="delete">Delete</button>
                 <button id="edit">Edit</button>
-              </div>
+              </div> */}
             </div>
           ) : (
             <div className="charts-create-inputs">
