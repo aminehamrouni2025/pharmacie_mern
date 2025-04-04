@@ -10,7 +10,14 @@ const PharmacistProduct = () => {
   const [editModal, setEditModal] = useState(false);
   const [editProductData, setEditProductData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 4;
+  const [productData, setProductData] = useState({
+    name: "",
+    description: "",
+    price: "",
+    stock: "",
+    expiry: "",
+    category: "",
+  });
   const [searchProduct, setSearchProduct] = useState("");
   const [productModal, setProductModal] = useState(false);
 
@@ -29,7 +36,6 @@ const PharmacistProduct = () => {
             headers: { Authorization: token },
           }
         );
-        console.log(response.data);
         setProducts(response.data.data);
       } catch (error) {
         console.log(error);
@@ -44,7 +50,7 @@ const PharmacistProduct = () => {
   };
 
   const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this product ?")) {
+    if (window.confirm("Are you sure you want to delete this product?")) {
       try {
         await axios.delete(
           `http://localhost:5000/api/pharmacies/delete-product/${id}`,
@@ -63,13 +69,13 @@ const PharmacistProduct = () => {
     product.name.toLowerCase().includes(searchProduct.toLowerCase())
   );
 
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const indexOfLastProduct = currentPage * 4;
+  const indexOfFirstProduct = indexOfLastProduct - 4;
   const currentProducts = filteredProducts.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const totalPages = Math.ceil(filteredProducts.length / 4);
 
   return (
     <div className="product-container">
@@ -163,8 +169,7 @@ const PharmacistProduct = () => {
           Prev
         </button>
         <span>
-          {" "}
-          Page {currentPage} of {totalPages}{" "}
+          Page {currentPage} of {totalPages}
         </span>
         <button
           disabled={currentPage === totalPages}
@@ -177,9 +182,12 @@ const PharmacistProduct = () => {
       {productModal && (
         <CreateProduct
           setProductModal={setProductModal}
+          productData={productData}
+          setProductData={setProductData}
           setProducts={setProducts}
         />
       )}
+
       {editModal && (
         <EditProduct
           product={editProductData}

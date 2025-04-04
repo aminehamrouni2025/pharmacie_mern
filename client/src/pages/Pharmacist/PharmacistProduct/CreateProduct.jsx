@@ -4,8 +4,8 @@ import { AiOutlineClose } from "react-icons/ai";
 import axios from "axios";
 
 const CreateProduct = ({
-  setProductData,
   productData,
+  setProductData,
   setProductModal,
   setProducts,
 }) => {
@@ -35,7 +35,7 @@ const CreateProduct = ({
         {
           headers: {
             Authorization: token,
-            "Content-Type": "multipart/form-data", // Ensure correct content type
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -45,15 +45,10 @@ const CreateProduct = ({
         autoClose: 3000,
       });
 
-      // Update the product list without reloading
-      setProducts((prevProducts) => [...prevProducts, response.data.data]);
-
+      setProducts((prev) => [...prev, response.data.data]);
       setProductModal(false);
     } catch (error) {
-      console.error(
-        "Error creating product:",
-        error.response?.data || error.message
-      );
+      console.error("Error creating product:", error);
       toast.error("❌ Failed to create product", {
         position: "top-right",
         autoClose: 3000,
@@ -107,7 +102,7 @@ const CreateProduct = ({
           <input
             type="text"
             name="expiry"
-            placeholder="Expiry Date"
+            placeholder="Expiry Date (DDMMYYYY)"
             onChange={(e) =>
               setProductData({ ...productData, expiry: e.target.value })
             }
