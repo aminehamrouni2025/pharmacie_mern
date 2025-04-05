@@ -24,12 +24,13 @@ function Login() {
    axios
      .post("http://localhost:5000/api/users/login", formData)
      .then((response) => {
-       const { token, role, id } = response.data;
+       const { token, role, id , fullName } = response.data;
 
        // Store token and role in local storage
        localStorage.setItem("token", token);
        localStorage.setItem("role", role);
        localStorage.setItem("id", id);
+       localStorage.setItem("fullName", fullName);
 
        // Success toast message
        toast.success("✅ Welcome Back!", {

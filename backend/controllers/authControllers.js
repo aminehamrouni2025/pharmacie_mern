@@ -50,19 +50,23 @@ exports.login = async (req, res) => {
       return res.status(403).json({ msg: "Email or password are wrong !" });
     } else {
       const token = jwt.sign(
-        { id: user._id, email: user.email, role: user.role },
+        {
+          id: user._id,
+          email: user.email,
+          role: user.role,
+          fullName: user.fullName,
+        },
         process.env.JWT_SECRET,
         { expiresIn: "3h" }
       );
 
-      return res
-        .status(200)
-        .json({
-          message: "Login successful",
-          token,
-          role: user.role,
-          id: user._id,
-        });
+      return res.status(200).json({
+        message: "Login successful",
+        token,
+        role: user.role,
+        fullName: user.fullName,
+        id: user._id,
+      });
     }
   } catch (error) {
     return res.status(500).json({ msg: error });

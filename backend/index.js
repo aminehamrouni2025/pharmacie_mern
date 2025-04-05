@@ -25,6 +25,7 @@ const authRoutes = require("./routes/authRoutes");
 const pharmacyRoutes = require("./routes/pharmacyRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const messageRoutes = require("./routes/messageRoutes");
+const visitorRoutes = require("./routes/visitorRoutes");
 
 // middlewares
 app.use(
@@ -48,6 +49,7 @@ app.use("/api/users/", authRoutes);
 app.use("/api/pharmacies/", pharmacyRoutes);
 app.use("/api/admin/", adminRoutes);
 app.use("/api/messages", messageRoutes);
+app.use("/api/visitors", visitorRoutes);
 
 // Database
 mongoose

@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaFacebook } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import { CiSearch } from "react-icons/ci";
 import { CiLock } from "react-icons/ci";
 import { GiShoppingCart } from "react-icons/gi";
 import { NavLink, Link } from "react-router";
-
+import axios from "axios";
 import Logo from "../../assets/pharmalogo.png";
 import "./LandingPage.css";
 import Carousel from "./carousel/Carousel";
 function LandingPage() {
+  const [products, setProducts] = useState([]);
+  const fetchAllProducts = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/api/visitors/products"
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(()=>{
+    fetchAllProducts()
+  })
+
   return (
     <div>
       {/* Navbar section */}

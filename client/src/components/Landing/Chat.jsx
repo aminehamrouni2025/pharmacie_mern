@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import io from "socket.io-client";
 import axios from "axios";
-import "./Chat.css"
+import "./Chat.css";
 import dayjs from "dayjs";
 
-const socket = io("http://localhost:5000");
-
-const Chat = ({ currentUser, receiverId }) => {
+const Chat = ({ currentUser, receiverId, pharmacistName, socket }) => {
   const [messages, setMessages] = useState([]);
   const [messageText, setMessageText] = useState("");
+  const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
     if (currentUser && receiverId) {
@@ -19,20 +17,34 @@ const Chat = ({ currentUser, receiverId }) => {
         .then((res) => setMessages(res.data))
         .catch((err) => console.error(err));
     }
-  }, [receiverId]);
+  }, [receiverId, currentUser]);
 
   useEffect(() => {
+    if (!socket || !currentUser) return;
+
     socket.emit("join", currentUser);
-    socket.on("newMessage", (msg) => {
+
+    const handleNewMessage = (msg) => {
       if (
         (msg.sender === receiverId && msg.receiver === currentUser) ||
         (msg.sender === currentUser && msg.receiver === receiverId)
       ) {
         setMessages((prev) => [...prev, msg]);
+
+        // Notification only for incoming messages
+        if (msg.sender === receiverId && msg.receiver === currentUser) {
+          setShowNotification(true);
+          setTimeout(() => setShowNotification(false), 3000);
+        }
       }
-    });
-    return () => socket.off("newMessage");
-  }, [currentUser, receiverId]);
+    };
+
+    socket.on("newMessage", handleNewMessage);
+
+    return () => {
+      socket.off("newMessage", handleNewMessage);
+    };
+  }, [socket, currentUser, receiverId]);
 
   const sendMessage = async () => {
     if (!messageText) return;
@@ -52,6 +64,11 @@ const Chat = ({ currentUser, receiverId }) => {
 
   return (
     <div className="chat-container">
+      {showNotification && (
+        <div className="notification">
+          🔔 New message from {pharmacistName || "Pharmacist"}
+        </div>
+      )}
       <div className="chat-box">
         {messages.map((msg) => (
           <div

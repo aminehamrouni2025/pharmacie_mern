@@ -13,6 +13,8 @@ const sendMessage = async (req, res) => {
   }
 };
 
+const User = require("../models/User"); // Import User model
+
 const getConversationPartners = async (req, res) => {
   const userId = req.user.id;
   try {
@@ -29,11 +31,17 @@ const getConversationPartners = async (req, res) => {
         partnerIds.add(msg.receiver.toString());
     });
 
-    res.json([...partnerIds]);
+    // Fetch user info (e.g., fullName) for each partner
+    const partners = await User.find({
+      _id: { $in: Array.from(partnerIds) },
+    }).select("_id fullName"); // Or whatever fields you want
+
+    res.json(partners);
   } catch (err) {
     res.status(500).json({ message: "Error getting partners", error: err });
   }
 };
+
 
 const getMessagesBetween = async (req, res) => {
   const userId = req.user.id;
