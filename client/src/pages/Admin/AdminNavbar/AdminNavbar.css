@@ -1,6 +1,6 @@
 /* Navbar Container */
 .admin-navbar {
-  background-color: #003e29;
+  background-color: #019641;
   color: white;
   display: flex;
   justify-content: space-between;
@@ -54,12 +54,12 @@
   text-align: center;
 }
 .admin-navbar .dropdown-menu #dropdown-btn {
-    background-color: #003e29;
+    background-color: #019641;
     color: #f0f0f0;
     width: 90%;
     border-radius: 25px;
     margin: 10px;
-    border: 1px solid #003e29;
+    border: 1px solid #019641;
      
 }
 .admin-navbar.dropdown-item:hover {

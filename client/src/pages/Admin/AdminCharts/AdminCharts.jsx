@@ -27,7 +27,7 @@ const AdminCharts = () => {
     { id: 3, value: stats.totalProducts, label: "Products" },
   ];
 
-  const colors = ["#003e29", "#a855f7", "#f59e0b", "#ef4444"]; // blue, purple, amber, red
+  const colors = ["#019641", "#a855f7", "#f59e0b", "#ef4444"]; // blue, purple, amber, red
   useEffect(() => {
     const fetchStats = async () => {
       try {
@@ -98,7 +98,7 @@ const AdminCharts = () => {
               series={[
                 {
                   data: barData.map((item) => item.value),
-                  color: "#003e29", // blue
+                  color: "#019641", // blue
                 },
               ]}
               width={400}

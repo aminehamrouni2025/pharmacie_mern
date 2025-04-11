@@ -1,10 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router";
-import { FaUser, FaUserMd, FaShoppingCart, FaBoxes } from "react-icons/fa";
+import {
+  FaUser,
+  FaUserMd,
+  FaShoppingCart,
+  FaBoxes,
+  FaRegComments,
+} from "react-icons/fa";
 import { FaCodePullRequest } from "react-icons/fa6";
 import { GiMedicines } from "react-icons/gi";
 import { SiHomeassistantcommunitystore } from "react-icons/si";
-
 
 import "./Sidebar.css";
 
@@ -36,6 +41,11 @@ const Sidebar = () => {
         <li>
           <NavLink to="/orders" className="nav-link">
             <FaShoppingCart className="icon" /> Orders
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/admin/messages" className="nav-link">
+            <FaRegComments className="icon" /> Messages
           </NavLink>
         </li>
       </ul>

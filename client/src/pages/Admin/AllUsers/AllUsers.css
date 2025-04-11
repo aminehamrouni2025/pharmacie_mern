@@ -70,7 +70,7 @@ td {
   display: flex;
   align-items: center;
   align-content: center;
-  border: 1px solid #003e26;
+  border: 1px solid #019641;
   height: 40px;
   border-radius: 20px;
 }
@@ -80,7 +80,7 @@ td {
   width: 180px;
 }
 .users-title .input-search h1 {
-  color: #003e26;
+  color: #019641;
   padding: 5px;
 }
 .all-users .users-title .create-btn {

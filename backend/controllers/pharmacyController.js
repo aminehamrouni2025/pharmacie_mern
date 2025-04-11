@@ -11,8 +11,8 @@ exports.getProfile = async (req, res) => {
       return res.status(403).json({ msg: "Only Pharmacists are allowed !!!" });
     }
     const pharmacistProfile = await User.findById(id);
-    if(!pharmacistProfile) {
-      return res.status(404).json({msg : "Something went wrong "})
+    if (!pharmacistProfile) {
+      return res.status(404).json({ msg: "Something went wrong " });
     }
     return res.status(201).json({ msg: "My Profile", data: pharmacistProfile });
   } catch (error) {
@@ -38,8 +38,6 @@ exports.getPharmacyByOwner = async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };
-
-
 
 exports.createPharmacy = async (req, res) => {
   try {
@@ -144,6 +142,7 @@ exports.createProduct = async (req, res) => {
     existingPharmacy.inventory.push({
       product: product._id,
       quantity: product.stock,
+      name: product.name,
     });
     await existingPharmacy.save();
 
@@ -236,6 +235,7 @@ exports.updateProduct = async (req, res) => {
     existingPharmacy.inventory.push({
       product: productObjectId,
       quantity: stock,
+      name: product.name,
     });
 
     console.log(`✅ New product entry added: ${productId} with stock ${stock}`);
@@ -328,7 +328,7 @@ exports.getAllProducts = async (req, res) => {
     if (!req.user || req.user.role !== "pharmacist") {
       return res.status(403).json({ msg: "Only Pharmacists are allowed!!!" });
     }
-    const products = await Product.find();
+    const products = await Product.find({ owner: req.user.id }); // Filter products by the pharmacist's ID
     return res.status(201).json({ msg: " My Products", data: products });
   } catch (error) {
     return res.status(500).json({ msg: error });
@@ -362,6 +362,34 @@ exports.createSupply = async (req, res) => {
     return res.status(500).json({ msg: error });
   }
 };
+exports.getAllSupplies = async (req, res) => {
+  try {
+    // Ensure user is authenticated
+    if (!req.user || req.user.role !== "pharmacist") {
+      return res.status(403).json({ msg: "Only Pharmacists are allowed !!!" });
+    }
+
+    const pharmacistId = req.user.id;
+
+    // Fetch supplies created by the authenticated pharmacist
+    const supplies = await Supply.find({ pharmacist: pharmacistId });
+
+    if (!supplies || supplies.length === 0) {
+      return res
+        .status(404)
+        .json({ msg: "No supplies found for this pharmacist." });
+    }
+
+    return res
+      .status(200)
+      .json({ msg: "Supplies retrieved successfully", data: supplies });
+  } catch (error) {
+    console.error("Error fetching supplies:", error);
+    return res
+      .status(500)
+      .json({ msg: "Server error. Please try again later." });
+  }
+};
 
 exports.getSupplyPharmacy = async (req, res) => {
   try {
@@ -375,5 +403,32 @@ exports.getSupplyPharmacy = async (req, res) => {
       .json({ msg: "Consulting supply", data: supplyPharmacy });
   } catch (error) {
     return res.status(500).json({ msg: error });
+  }
+};
+
+exports.getPharmacistStats = async (req, res) => {
+  try {
+    const { id } = req.user;
+
+    // Ensure that the user is authenticated and is a pharmacist
+    if (!req.user || req.user.role !== "pharmacist") {
+      return res.status(403).json({ msg: "Only Pharmacists are allowed !!!" });
+    }
+
+    // Count the number of products created by the pharmacist
+    const productCount = await Product.countDocuments({ owner: id });
+
+    // Count the number of supplies created by the pharmacist
+    const supplyCount = await Supply.countDocuments({ pharmacist: id });
+
+    return res.status(200).json({
+      msg: "Pharmacist stats retrieved successfully",
+      data: {
+        productCount,
+        supplyCount,
+      },
+    });
+  } catch (error) {
+    return res.status(500).json({ msg: error.message });
   }
 };

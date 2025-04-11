@@ -1,0 +1,65 @@
+.inventory-container {
+  width:100%;
+  background-color: white;
+   padding: 10px;
+  text-align: center;
+}
+
+.inventory-title {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.inventory-container .inventory-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%; 
+}
+.inventory-container .inventory-content img {
+  width: 500px;
+}
+.inventory-table {
+  width: 600px;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.inventory-table th,
+.inventory-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.inventory-table th {
+  background-color: #007bff;
+  color: white;
+}
+
+.inventory-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.error-message {
+  color: red;
+}
+
+.no-inventory {
+  font-size: 16px;
+  color: gray;
+}
+
+.download-btn {
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.download-btn:hover {
+  background-color: #218838;
+}

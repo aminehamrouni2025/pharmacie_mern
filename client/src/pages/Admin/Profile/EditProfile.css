@@ -23,7 +23,7 @@
   gap: 5px;
   margin-bottom: 10px;
   width: 15%;
-  color: #003e29;
+  color: #019641;
 }
 
 .back-btn:hover {
@@ -65,7 +65,7 @@
 }
 
 .save-btn {
-  background: #003e29;
+  background: #019641;
   border: none;
   padding: 10px 15px;
   border-radius: 5px;
